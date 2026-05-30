@@ -1,0 +1,18 @@
+# Hardened acme.sh image for DNS-01 challenge
+FROM cgr.dev/chainguard/wolfi-base:latest
+
+# Install dependencies
+RUN apk update && apk add --no-cache \
+    curl \
+    openssl \
+    socat \
+    bash \
+    bind-tools
+
+# Download acme.sh source to /opt/acme.sh instead of installing to home
+RUN mkdir -p /opt/acme.sh && \
+    curl -L https://github.com/acmesh-official/acme.sh/archive/master.tar.gz | tar xz -C /opt/acme.sh --strip-components=1
+
+# Entrypoint points to the script in /opt
+ENTRYPOINT ["/opt/acme.sh/acme.sh"]
+CMD ["--help"]

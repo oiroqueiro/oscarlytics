@@ -1,0 +1,86 @@
+<!-- index.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="section border-top bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">             
+            <div class="row row-cols-1 row-cols-md-2 g-4">                  
+                      
+              {% for proj in projs %}          
+                <div class="col">
+                  <div class="blog-card card mb-3">
+                    <div class="card-img position-relative">
+                      <picture>
+                        <source  srcset="{{ url_for('static', filename='img/projects/') }}{{ proj.image_title }}_545x.webp"  media="(max-width: 575px)">
+                        <source  srcset="{{ url_for('static', filename='img/projects/') }}{{ proj.image_title }}_600x.webp"  media="(max-width: 767px)">
+                        <source  srcset="{{ url_for('static', filename='img/projects/') }}{{ proj.image_title }}_700x.webp"  media="(max-width: 991px)">
+                        <source  srcset="{{ url_for('static', filename='img/projects/') }}{{ proj.image_title }}_1110x.webp" >
+                        <img  loading="lazy" decoding="async" src="{{ url_for('static', filename='img/projects/') }}{{ proj.image_title }}_1110.jpg"class=" w-100 card-img-top img-fluid" alt="" width="1200" height="800">
+                      </picture>
+                      
+                      <div class="post-info">
+                        <span class="text-uppercase">{{ get_date_name(lang,proj.date) }}</span>
+                      </div>
+                    </div>
+          
+                    <div class="card-body">
+                      <ul class="post-meta mb-2">
+
+                        {% set keyw_list = proj.keywords.split(',') %}                          
+                        <li>
+                          <span class="px-1">|</span>                      
+                          {% for keyw in keyw_list %}
+                            <a class="text-uppercase" href="{{ url_for('projects', _external=True, lang=lang, keyw=keyw, page=page) }}">{{ keyw }}</a>
+                            <span class="px-1">|</span> 
+                          {% endfor %}
+                        </li>
+                        
+                      </ul>
+                      
+                      <h2 class="h3 fw-light mb-3"><a class="post-title" href="{{ url_for('project', lang=get_lang_name_proj(proj.id), proj_date=proj.date, proj_n=proj.project_n, title_slug=proj.title_slug) }}">{{ proj.title }} </a></h2>                  
+                      <p class="card-text mb-4">{{ proj.resume|markdown }}</p>
+                      <a class="btn btn-outline-primary btn-sm" href="{{ url_for('project', lang=get_lang_name_proj(proj.id), proj_date=proj.date, proj_n=proj.project_n, title_slug=proj.title_slug) }}">{{ view_details }}</a>
+
+                    </div>
+                  </div>
+                </div>              
+              {% endfor %}
+            </div>  
+          
+        <nav aria-label="Page navigation">
+          <ul class="pagination align-items-center justify-content-center">
+          
+            {% if prev_url %}
+            <li class="page-item prev d-flex align-items-center">
+              <a class="page-link arrow" href="{{ prev_url }}" aria-label="Pagination">{{ previous }}<i
+                  class="fas fa-arrow-left ms-3"></i>
+              </a>
+            </li>
+            {% endif%}      
+            
+            <li class="page-item">
+              <a href="{{ url_for('search', _external=True, lang=lang, page=page) }}" class="page-link active">{{ page }}</a>
+            </li>
+
+            {% if next_url %}
+            <li class="page-item next d-flex align-items-center">
+              <a class="page-link arrow" href="{{ next_url }}" aria-label="Pagination">{{ next }}<i
+                  class="fas fa-arrow-right ms-3"></i>
+              </a>
+            </li>
+            {% endif %}
+            
+          </ul>
+        </nav>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

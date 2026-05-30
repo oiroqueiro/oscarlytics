@@ -1,0 +1,71 @@
+<!-- index.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+      <div class="col-12">
+        <picture>
+          <source  srcset="{{ url_for('static', filename='img/ProfilePictureAbout_545x.webp') }}"  media="(max-width: 575px)">
+            <source  srcset="{{ url_for('static', filename='img/ProfilePictureAbout_600x.webp') }}"  media="(max-width: 767px)">
+            <source  srcset="{{ url_for('static', filename='img/ProfilePicture7About_700x.webp') }}"  media="(max-width: 991px)">
+            <source  srcset="{{ url_for('static', filename='img/ProfilePictureAbout_1110x.webp') }}" >
+
+            <img  loading="lazy" decoding="async" src="{{ url_for('static', filename='img/ProfilePictureAbout_1110x.jpg') }}" class=" rounded img-fluid" width="1500" height="778">
+        </picture>
+       </div>
+    </div>
+
+    <div class="row section">
+      <div class="col-lg-8 mx-auto">
+        <div class="content">
+          <h2 id="hiim-oscar-iglesias-data-analyst-and-erp-developer">{{ hello }}</h2>
+            <p>{{ parragraph1|markdown }}</p>
+            <p>{{ parragraph2|markdown }}</p>
+            <p>{{ parragraph3|markdown }}</p>
+            <p>{{ parragraph4|markdown }}</p>
+            <p>{{ parragraph5|markdown }}</p>
+            <p>{{ parragraph6|markdown }}</p>
+
+          {% if youtube %}
+            <h3 id="youtube">Youtube</h3>
+
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+              <iframe src="{{ youtube }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+            </div>
+          {% endif %}
+
+          <style>
+            .skills-list p {
+              display: inline;
+              margin: 0;
+            }
+          </style>
+          <h3 id="our-skill">{{ skills_title }}</h3>          
+            <ul class="skills-list">
+            <li>{{ skill1|markdown }}</li>
+            <li>{{ skill2|markdown }}</li>
+            <li>{{ skill3|markdown }}</li>
+            <li>{{ skill4|markdown }}</li>
+            </ul>
+
+          <div class="d-none">{{ plot | safe }}</div>          
+
+          <!-- Add this somewhere in your HTML -->
+          <div id="clicked-value">{{ clicked_value }}</div>
+
+          <a href="{{ url_for('projects', _external=True, lang=lang) }}" class="btn btn-primary text-white">{{ more }}</a>
+
+        </div>
+
+        <div class="gallery-item d-none">
+          <div class="row g-4">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+
+{% endblock %}
+	

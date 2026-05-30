@@ -1,0 +1,13 @@
+[Kube]
+Network=portfolio-network
+Yaml=portfolio.yaml
+AutoUpdate=registry
+PublishPort=8080:8081
+PublishPort=8443:8443
+PublishPort=7700:7700
+
+[Install]
+WantedBy=default.target
+
+[Service]
+EnvironmentFile=${PWD}/infra/.env

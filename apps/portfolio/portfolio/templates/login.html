@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section pt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8 col-lg-5 mx-auto">
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <h2 class="fw-bold">{{ signin }}</h2>
+                            <p class="text-muted">{{ login_subtitle }}</p>
+                        </div>
+
+                        <form action="" method="post" novalidate>
+                            {{ form.csrf_token() }}
+
+                            <div class="mb-4">
+                                <label for="username" class="form-label fw-semibold">{{ form.username.label.text
+                                    }}</label>
+                                {{ form.username(class="form-control form-control-lg bg-light border-0 py-3",
+                                placeholder="Username", id="username") }}
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="password" class="form-label fw-semibold">{{ form.password.label.text
+                                    }}</label>
+                                {{ form.password(class="form-control form-control-lg bg-light border-0 py-3",
+                                placeholder="Password", id="password") }}
+                            </div>
+
+                            <div class="mb-4 form-check">
+                                {{ form.remember_me(class="form-check-input", id="remember_me") }}
+                                <label class="form-check-label text-muted" for="remember_me">
+                                    {{ form.remember_me.label.text }}
+                                </label>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg py-3 fw-bold shadow-sm">
+                                    {{ form.submit.label.text }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('index', lang=lang) }}" class="text-decoration-none text-muted small">
+                        <i class="bi bi-arrow-left me-1"></i> {{ back_home }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .form-control:focus {
+        box-shadow: none;
+        border: 1px solid var(--bs-primary);
+        background-color: transparent !important;
+        color: inherit !important;
+    }
+</style>
+{% endblock %}

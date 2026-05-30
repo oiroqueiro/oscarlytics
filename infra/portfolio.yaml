@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: portfolio
+spec:
+  containers:
+  - image: cgr.dev/chainguard/postgres:latest
+    name: db
+    env:
+      - name: POSTGRES_DB
+        value: "${DB_NAME}"
+      - name: POSTGRES_USER
+        value: "${DB_USER}"
+      - name: POSTGRES_PASSWORD
+        value: "${DB_PASSWORD}"
+    volumeMounts:
+    - mountPath: /var/lib/postgresql/data
+      name: db-data
+    ports:
+    - containerPort: 5432
+      hostPort: 5432
+  - name: nginx
+    image: ${GHCR_REGISTRY}/portfolio-nginx:latest
+    imagePullPolicy: Always
+    ports:
+    - containerPort: 8081
+    - containerPort: 8443
+    volumeMounts:
+    - mountPath: /etc/nginx/certs
+      name: cert-data
+      readOnly: true
+  - name: app
+    image: ${GHCR_REGISTRY}/portfolio-app:latest
+    imagePullPolicy: Always
+    env:
+      - name: DATABASE_URL
+        value: "${DATABASE_URL}"
+    # env: (All variables loaded from /app/.env via python-dotenv)
+    volumeMounts:
+      - mountPath: /app/infra
+        name: env-file
+      - mountPath: /app/mounted
+        name: portfolio-storage
+      - mountPath: /app/portfolio/static/img
+        name: portfolio-img-data
+  - name: meilisearch
+    image: ${GHCR_REGISTRY}/portfolio-meilisearch:latest
+    imagePullPolicy: Always
+    env:
+      - name: MEILI_HTTP_ADDR
+        value: "0.0.0.0:7700"
+      - name: MEILI_MASTER_KEY
+        value: "${MEILI_MASTER_KEY}"
+      - name: MEILI_ENV
+        value: "production"
+    volumeMounts:
+      - mountPath: /meili_data
+        name: meili-data
+  - name: acme-sh
+    image: ${GHCR_REGISTRY}/portfolio-acmesh:latest
+    imagePullPolicy: Always
+    env:
+      - name: DuckDNS_Token
+        value: "${DuckDNS_Token}"
+      - name: DOMAIN
+        value: "${DOMAIN}"
+    command: ["/bin/bash", "-c"]
+    args: ["while true; do /opt/acme.sh/acme.sh --cron --home /root/.acme.sh; sleep 86400; done"]
+    volumeMounts:
+      - mountPath: /root/.acme.sh
+        name: cert-data
+  volumes:
+  - name: db-data
+    persistentVolumeClaim:
+      claimName: portfolio_db_data
+  - name: meili-data
+    persistentVolumeClaim:
+      claimName: portfolio_meilisearch_data
+  - name: portfolio-storage
+    persistentVolumeClaim:
+      claimName: portfolio_storage_data
+  - name: portfolio-img-data
+    hostPath:
+      path: "${PORTFOLIO_IMG_DIR}"
+      type: Directory
+  - name: env-file
+    hostPath:
+      path: "${PWD}/infra/"
+      type: Directory
+  - name: cert-data
+    persistentVolumeClaim:
+      claimName: portfolio_certs
+

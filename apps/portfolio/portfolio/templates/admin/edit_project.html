@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="section pt-5">
+    <div class="container">
+        <div class="row section pt-0">
+            <div class="col-12 col-lg-8 mx-auto">
+
+                <div class="mb-4">
+                    <a href="{{ url_for('manage_projects', lang=lang) }}" class="text-decoration-none text-muted">
+                        <i class="fas fa-arrow-left"></i> {{ t.admin_back_manage }}
+                    </a>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h2 fw-light mb-0">{{ t.admin_edit_title }}</h1>
+                    <form action="{{ url_for('restore_project', lang=lang, proj_id=project.id) }}" method="POST"
+                        class="d-inline" onsubmit="return confirm('{{ t.admin_restore_confirm }}');">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                            <i class="fas fa-undo-alt me-1"></i> {{ t.admin_restore_btn }}
+                        </button>
+                    </form>
+                </div>
+
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <form action="{{ url_for('edit_project', lang=lang, proj_id=project.id) }}" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+                            <div class="row">
+                                <div class="col-md-8 mb-3">
+                                    <label for="title" class="form-label text-muted">{{ t.admin_form_title }}</label>
+                                    <input type="text" class="form-control" id="title" name="title"
+                                        value="{{ project.title }}" required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="date" class="form-label text-muted">{{ t.admin_form_date }}</label>
+                                    <input type="date" class="form-control" id="date" name="date"
+                                        value="{{ project.date.strftime('%Y-%m-%d') }}" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-9 mb-3">
+                                    <label for="keywords" class="form-label text-muted">{{ t.admin_form_keywords
+                                        }}</label>
+                                    <input type="text" class="form-control" id="keywords" name="keywords"
+                                        value="{{ project.keywords }}">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="project_n" class="form-label text-muted">{{ t.admin_form_number
+                                        }}</label>
+                                    <input type="number" class="form-control" id="project_n" name="project_n"
+                                        value="{{ project.project_n }}" required min="1">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="exposition" class="form-label text-muted">{{ t.admin_form_content }}</label>
+                                <textarea class="form-control font-monospace" id="exposition" name="exposition"
+                                    rows="20" style="font-size: 0.9rem;">{{ project.exposition }}</textarea>
+                            </div>
+
+                            <!-- Advanced / Images & Links Collapse -->
+                            <p>
+                                <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#advancedControls" aria-expanded="false"
+                                    aria-controls="advancedControls">
+                                    {{ t.admin_show_advanced }}
+                                </button>
+                            </p>
+                            <div class="collapse mb-4" id="advancedControls">
+                                <div class="card card-body bg-light border-0">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="image_title" class="form-label text-muted small">{{
+                                                t.admin_form_cover_title }}</label>
+                                            <input type="text" class="form-control form-control-sm" id="image_title"
+                                                name="image_title" value="{{ project.image_title or '' }}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label text-muted small">{{ t.admin_form_image1 }}</label>
+                                            <input type="text" class="form-control form-control-sm" name="image1"
+                                                value="{{ project.image1 or '' }}">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label text-muted small">{{ t.admin_form_image2 }}</label>
+                                            <input type="text" class="form-control form-control-sm" name="image2"
+                                                value="{{ project.image2 or '' }}">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label text-muted small">{{ t.admin_form_image3 }}</label>
+                                            <input type="text" class="form-control form-control-sm" name="image3"
+                                                value="{{ project.image3 or '' }}">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label text-muted small">{{ t.admin_form_image4 }}</label>
+                                            <input type="text" class="form-control form-control-sm" name="image4"
+                                                value="{{ project.image4 or '' }}">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label text-muted small">{{ t.admin_form_image5 }}</label>
+                                            <input type="text" class="form-control form-control-sm" name="image5"
+                                                value="{{ project.image5 or '' }}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label text-muted small">{{ t.admin_form_link1 }}</label>
+                                            <input type="url" class="form-control form-control-sm" name="link1"
+                                                value="{{ project.link1 or '' }}">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label text-muted small">{{ t.admin_form_link2 }}</label>
+                                            <input type="url" class="form-control form-control-sm" name="link2"
+                                                value="{{ project.link2 or '' }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end mt-4">
+                                <a href="{{ url_for('manage_projects', lang=lang) }}"
+                                    class="btn btn-light me-2 px-4 py-2">{{ t.admin_cancel_btn }}</a>
+                                <button type="submit" class="btn btn-primary px-4 py-2">{{ t.admin_save_btn }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

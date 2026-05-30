@@ -1,0 +1,237 @@
+# Contenido Estático de la Web
+# Este fichero alimenta las traducciones y textos base del sitio.
+
+languages:
+- id: en
+- id: es
+content:
+  en:
+    global:
+      menu_home: Home
+      menu_about: Behind the Lab
+      menu_projects: Projects
+      menu_contact: Let's Talk
+      menu_manage: Manage Content
+      menu_manage_home: Dashboard
+      menu_manage_upload: Upload Project
+      menu_manage_about: Edit About
+      menu_manage_projects: Edit Projects
+      menu_manage_contact: Edit Contact
+      menu_manage_logout: Logout
+      get_touch: Write me
+      foot: Follow me
+      signin: Sign In
+      username: Username
+      password: Password
+      rememberme: Remember Me
+      errorlogin: Invalid username or password
+      more: Explore the Lab
+      view_details: View Details
+      previous: Previous
+      next: Next
+      read: read
+      keyw_title: Keywords
+      project_action: Action
+      project_resolution: Resolution
+      search: Type & Hit Enter to search projects…
+      search_keyw: Search keywords...
+      error: Something went wrong
+      error_subtitle: "This is strange, but I couldn't catch where you wanted to go.\
+        \ \nPlease, return to home and use the available options."
+      back_home: Back To Home
+    manage_projects:
+      admin_back_dashboard: Back to Dashboard
+      admin_manage_title: Manage Projects & Content
+      admin_new_project: New Project
+      admin_base_texts: Portfolio Base Texts
+      admin_base_texts_desc: Modify your strings inside the content.yaml file and reload them using the dashboard action. In the future, you will be able to edit them directly here.
+      admin_current_translation: 'Current translation loaded for:'
+      admin_published_projects: Published Projects
+      admin_table_date: Date
+      admin_table_title: Title
+      admin_table_tags: Tags
+      admin_table_actions: Actions
+      admin_view_project: View Project
+      admin_edit_title: Edit Project
+      admin_editing_soon: Editing coming soon
+      admin_no_projects: No projects found for
+      admin_no_projects_tail: Upload a markdown file to get started.
+      admin_delete_btn: Delete
+      admin_delete_confirm: Are you sure you want to delete this project from the database? The original file will not be deleted.
+    dashboard:
+      admin_dashboard_title: Admin Dashboard
+      admin_upload_title: Upload Markdown Project
+      admin_upload_desc: Upload a .md file with frontmatter to add a new project to your portfolio. It will be indexed immediately in Postgres and Meilisearch.
+      admin_upload_btn: Upload Project .md
+      admin_reload_title: Reload Static Configuration
+      admin_reload_desc: Did you modify content.yaml? Click here to reload the translation strings and texts into the database without restarting the container.
+      admin_reload_btn: Reload YAML Content
+    upload:
+      admin_back_dashboard: Back to Dashboard
+      admin_upload_title: Upload Markdown Project
+      admin_upload_select: Select your .md file
+      admin_upload_btn: Upload & Process
+    edit_project:
+      admin_back_manage: Back to Manage Projects
+      admin_edit_title: Edit Project
+      admin_restore_btn: Restore Original Version
+      admin_restore_confirm: 'Are you sure you want to restore the original version? This will permanently delete your web edits and revert to the package file on the next sync.'
+      admin_form_title: Title
+      admin_form_date: Date
+      admin_form_keywords: Keywords (comma separated)
+      admin_form_number: Project Number
+      admin_form_content: Markdown Content
+      admin_show_advanced: Show Image & Link Fields
+      admin_form_cover_title: Cover Image Title
+      admin_form_image1: Image 1
+      admin_form_image2: Image 2
+      admin_form_image3: Image 3
+      admin_form_image4: Image 4
+      admin_form_image5: Image 5
+      admin_form_link1: Link 1
+      admin_form_link2: Link 2
+      admin_cancel_btn: Cancel
+      admin_save_btn: Save Changes
+    index:
+      hello: Hey, I’m
+      name: Oscar Iglesias
+      subtitle: Welcome to my personal engineering and data lab. A space where I document my own projects in case you find them useful or inspiring.
+    about:
+      hello: Hello, I am Oscar Iglesias and this is my Personal Data Lab.
+      parragraph1: "After more than two decades of a technical career evolving from **ERP** developing toward **Business Intelligence**, this space was born as a personal repository. Here, I document the implentation of <u>personal and functional proyects</u>, free from the constraints of corporate environments."
+      parragraph2: "Professionally, my day-to-day combines strategic vision with hands-on execution. I like to maintain a hybrid profile that allows me to understand data throughout its entire lifecycle: from designing models in Power BI and reporting architectures to the SQL logic that ensures information is reliable and useful for decision-making."
+      parragraph3: "This Lab is the environment where I deploy my preference for the **Open Source** ecosystem and **containerization** (Docker and Podman). I manage a distributed infrastructure connecting my local workstation (Ubuntu) with cloud nodes (Oracle OCI), a VPS server and even my mobile, creating the ecosystem needed for every projects to be fully operative."
+      parragraph4: "What you will see are not theoretical exercises, but solutions with a real architecture and purpose. I invite you to explore the results in my projects section."
+      parragraph5: ""
+      parragraph6: ""
+      skills_title: "🛠️ TECHNICAL PROFILE (SUMMARY)"
+      skill1: "**Business Intelligence**: Data model design and reporting architectures with Power BI and SSRS (current). I have over 15 years of experience with SSRS (including reporting in Dynamics AX) and 13 years of experience in QlikView."
+      skill2: "**Data management**: More than 20 years working with SQL engines (SQL Server, Oracle, MySQL, PostgreSQL) focused on reporting, ETL processes and business logic."
+      skill3: "**Management Systems (ERP)**: +25 years of technical experience and functional in ERP ecosystems (Microsoft Dynamics NAV, AX, CRM and Oracle)."
+      skill4: "**Lab Infrastructure**: Linux environments (Ubuntu), deployment with containers (Docker/Podman) and distributed nodes in OCI."
+      youtube: ''
+    contact:
+      title: Architecture & Feedback
+      subtitle: These projects are born out of curiosity and the drive to implement new features or improve how things work. If you’ve found them useful or want to discuss any technical details about the architecture, I’d love to hear from you.
+      first_name: First Name
+      last_name: Last Name
+      email: Email
+      message: Type your message...
+      submit: Submit message
+      email_subject: New message from Oscarlytics Personal Data Lab
+  es:
+    global:
+      menu_home: Inicio
+      menu_about: Detrás del Lab
+      menu_projects: Proyectos
+      menu_contact: Hablemos
+      menu_manage: Gestionar Contenido
+      menu_manage_home: Tablero
+      menu_manage_upload: Subir Proyecto
+      menu_manage_about: Editar Sobre Mí
+      menu_manage_projects: Editar Proyectos
+      menu_manage_contact: Editar Contacto
+      menu_manage_logout: Cerrar Sesión
+      get_touch: Escríbeme
+      foot: Sígueme
+      signin: Inicio Sesión
+      username: Nombre de Usuario
+      password: Contraseña
+      rememberme: Recuérdame
+      errorlogin: Nombre de Usuario o Contraseña no válidos
+      more: Explorar el Lab
+      view_details: Ver Detalles
+      keyw_title: Palabras clave
+      project_action: Acción
+      project_resolution: Resolución
+      previous: Anterior
+      next: Siguiente
+      read: lectura
+      search: Escribe y pulsa Enter para buscar projectos…
+      search_keyw: Buscar palabras clave…
+      error: Algo ha ido mal.
+      error_subtitle: "Esto es extraño, pero no pude entender a dónde querías ir.\
+        \ \nPor favor, vuelve a la página principal y usa las opciones disponibles."
+      back_home: Volver A Inicio
+    manage_projects:
+      admin_back_dashboard: Volver al Tablero
+      admin_manage_title: Gestionar Proyectos y Contenido
+      admin_new_project: Nuevo Proyecto
+      admin_base_texts: Textos Base del Portafolio
+      admin_base_texts_desc: Modifica tus textos dentro del archivo content.yaml y recárgalos usando la acción del tablero. En el futuro, podrás editarlos directamente aquí.
+      admin_current_translation: 'Traducción actual cargada para:'
+      admin_published_projects: Proyectos Publicados
+      admin_table_date: Fecha
+      admin_table_title: Título
+      admin_table_tags: Etiquetas
+      admin_table_actions: Acciones
+      admin_view_project: Ver Proyecto
+      admin_edit_title: Editar Proyecto
+      admin_editing_soon: Próximamente edición
+      admin_no_projects: No se han encontrado proyectos para
+      admin_no_projects_tail: Sube un archivo markdown para empezar.
+      admin_delete_btn: Eliminar
+      admin_delete_confirm: ¿Estás seguro de eliminar este proyecto de la base de datos? El archivo original no se borrará.
+    dashboard:
+      admin_dashboard_title: Tablero de Administración
+      admin_upload_title: Subir Proyecto Markdown
+      admin_upload_desc: Sube un archivo .md con frontmatter para agregar un nuevo proyecto a tu portafolio. Será indexado inmediatamente en Postgres y Meilisearch.
+      admin_upload_btn: Subir Proyecto .md
+      admin_reload_title: Recargar Configuración Estática
+      admin_reload_desc: ¿Modificaste content.yaml? Haz clic aquí para recargar las cadenas de traducción y textos en la base de datos sin necesidad de reiniciar el contenedor.
+      admin_reload_btn: Recargar Contenido YAML
+    upload:
+      admin_back_dashboard: Volver al Tablero
+      admin_upload_title: Subir Proyecto Markdown
+      admin_upload_select: Selecciona tu archivo .md
+      admin_upload_btn: Subir y Procesar
+      admin_delete_btn: Eliminar
+      admin_delete_confirm: ¿Estás seguro de eliminar este proyecto de la base de datos? El archivo original no se borrará.
+    edit_project:
+      admin_back_manage: Volver a Gestionar Proyectos
+      admin_edit_title: Editar Proyecto
+      admin_restore_btn: Restaurar Versión Original
+      admin_restore_confirm: '¿Estás seguro de que quieres restaurar la versión original? Esto eliminará permanentemente tus ediciones web y volverá al archivo del paquete en la próxima sincronización.'
+      admin_form_title: Título
+      admin_form_date: Fecha
+      admin_form_keywords: Palabras clave (separadas por comas)
+      admin_form_number: Número de Proyecto
+      admin_form_content: Contenido Markdown
+      admin_show_advanced: Mostrar campos de Imagen y Enlace
+      admin_form_cover_title: Título Imagen de Portada
+      admin_form_image1: Imagen 1
+      admin_form_image2: Imagen 2
+      admin_form_image3: Imagen 3
+      admin_form_image4: Imagen 4
+      admin_form_image5: Imagen 5
+      admin_form_link1: Enlace 1
+      admin_form_link2: Enlace 2
+      admin_cancel_btn: Cancelar
+      admin_save_btn: Guardar Cambios
+    index:
+      hello: Hola, soy
+      name: Oscar Iglesias
+      subtitle: Bienvenid@ a mi laboratorio de ingeniería y datos. Un espacio personal donde documento mis propios proyectos por si te son de utilidad o inspiración.
+    about:
+      hello: Hola, soy Oscar Iglesias y este es mi Personal Data Lab.
+      parragraph1: "Tras más de dos décadas de trayectoria técnica evolucionando desde el desarrollo de sistemas **ERP** hacia el **Business Intelligence**, este espacio nace como un repositorio personal donde documento la implementación de <u>proyectos personales y funcionales</u>, fuera de las restricciones de los entornos corporativos."
+      parragraph2: "Profesionalmente, mi día a día combina la visión estratégica con la ejecución directa. Me gusta mantener un perfil híbrido que me permite entender el dato en todo su ciclo de vida: desde el diseño de modelos en Power BI y arquitecturas de reporting, hasta la lógica SQL que garantiza que la información sea fiable y útil para la toma de decisiones."
+      parragraph3: "Este laboratorio es el entorno donde despliego mi preferencia por el ecosistema **Open Source** y la **containerización** (Docker y Podman). Gestiono una infraestructura distribuida que conecta mi estación de trabajo local (Ubuntu) con nodos en la nube (OCI de Oracle), un servidor VPS e incluso mi móvil, creando el ecosistema necesario para que cada desarrollo sea plenamente operativo."
+      parragraph4: "Lo que verás aquí no son ejercicios teóricos, sino soluciones con una arquitectura y un propósito real detrás. Te invito a explorar los resultados en mi sección de proyectos."
+      parragraph5: ""
+      parragraph6: ""
+      skills_title: "🛠️ PERFIL TÉCNICO (RESUMEN)"
+      skill1: "**Business Intelligence**: Diseño de modelos de datos y arquitecturas de reporting con Power BI y SSRS (actualmente). Cuento con más de 15 años de experiencia acumulada con SSRS (incluyendo reporting en Dynamics AX) y 13 años en soluciones QlikView."
+      skill2: "**Gestión de Datos**: Más de 20 años trabajando con motores SQL (SQL Server, Oracle, MySQL, PostgreSQL) enfocados a informes, procesos ETL y lógica de negocio."
+      skill3: "**Sistemas de Gestión**: +25 años de experiencia técnica y funcional en ecosistemas ERP (Microsoft Dynamics NAV, AX, CRM y Oracle)."
+      skill4: "**Infraestructura del Lab**: Gestión de entornos Linux (Ubuntu), despliegue mediante contenedores (Docker/Podman) y nodos distribuidos en OCI."
+      youtube: ''
+    contact:
+      title: Arquitectura y Feedback
+      subtitle: Estos proyectos nacen de la curiosidad y de las ganas de implementar nuevas funcionalidades o mejorar procesos. Si te han servido de referencia o quieres comentar algún detalle técnico de la arquitectura, estaré encantado de intercambiar impresiones contigo.
+      first_name: Nombre
+      last_name: Apellidos
+      email: Correo Electrónico
+      message: Escribe tu mensaje...
+      submit: Enviar mensaje
+      email_subject: Nuevo mensaje desde el Personal Data Lab de Oscarlytics

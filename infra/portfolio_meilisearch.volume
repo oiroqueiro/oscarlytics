@@ -1,0 +1,9 @@
+[Volume]
+VolumeName=portfolio_meilisearch_data
+# We use the environment variable to make it dynamic
+Device="${PWD}/data/meilisearch_data"
+Type=none
+Options=bind,z
+
+[Install]
+WantedBy=default.target

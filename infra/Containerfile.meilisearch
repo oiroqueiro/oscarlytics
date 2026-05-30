@@ -1,0 +1,33 @@
+# Stage 1: Build/Download stage
+FROM cgr.dev/chainguard/wolfi-base:latest as builder
+
+ARG MEILI_VERSION=v1.12.5
+WORKDIR /build
+
+# Install curl to download the binary
+RUN apk add --no-cache curl
+
+# Download the static binary
+RUN curl -L https://github.com/meilisearch/meilisearch/releases/download/${MEILI_VERSION}/meilisearch-linux-amd64 -o meilisearch && \
+    chmod +x meilisearch
+
+# Stage 2: Final hardened stage
+FROM cgr.dev/chainguard/wolfi-base:latest
+
+# Create a non-root user with UID 1000 to match host
+# RUN addgroup -g 1000 meili && adduser -u 1000 -G meili -S meili
+
+WORKDIR /meili_data
+
+# Copy only the binary from the builder stage
+COPY --from=builder /build/meilisearch /bin/meilisearch
+
+# Ensure correct permissions
+# RUN chown -R meili:meili /meili_data
+
+# USER meili
+
+# Meilisearch default port
+EXPOSE 7700
+
+ENTRYPOINT ["/bin/meilisearch"]

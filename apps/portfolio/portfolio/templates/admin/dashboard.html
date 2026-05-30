@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="section pt-5">
+    <div class="container">
+        <div class="row section pt-0">
+            <div class="col-12 col-lg-8 mx-auto">
+                <h1 class="h2 fw-light mb-4">{{ t.admin_dashboard_title }}</h1>
+
+                <div class="card mb-4 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h5 class="card-title text-primary"><i class="fas fa-file-upload"></i> {{
+                            t.admin_upload_title }}</h5>
+                        <p class="card-text text-muted">{{ t.admin_upload_desc }}</p>
+                        <a href="{{ url_for('upload_project', lang=lang) }}" class="btn btn-primary px-4 py-2">
+                            {{ t.admin_upload_btn }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card mb-4 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h5 class="card-title text-success"><i class="fas fa-sync-alt"></i> {{
+                            t.admin_reload_title }}</h5>
+                        <p class="card-text text-muted">{{ t.admin_reload_desc }}</p>
+                        <form action="{{ url_for('reload_yaml', lang=lang) }}" method="POST">
+                            <button type="submit" class="btn btn-outline-success px-4 py-2">
+                                {{ t.admin_reload_btn }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

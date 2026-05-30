@@ -1,0 +1,39 @@
+
+@font-face {
+font-family: "portfoliocustomicons";
+font-style: normal;
+font-weight: 400;
+font-display: block;
+unicode-range: U+e900, U+e901;
+src:  url('fonts/portfolio.eot?7rlwn1');
+src:  url('fonts/portfolio.eot?7rlwn1#iefix') format('embedded-opentype'),
+    url('fonts/portfolio.ttf?7rlwn1') format('truetype'),
+    url('fonts/portfolio.woff?7rlwn1') format('woff'),
+    url('fonts/portfolio.woff2?7rlwn1') format('woff2'),
+    url('fonts/portfolio.svg?7rlwn1#portfolio') format('svg');
+}
+
+
+[class^="icon-"], [class*=" icon-"] {
+/* use !important to prevent issues with browser extensions that change fonts */
+font-family: 'portfoliocustomicons', Arial, sans-serif !important;
+speak: never;
+font-style: normal;
+font-weight: normal;
+font-variant: normal;
+text-transform: none;
+line-height: 1;
+
+/* Better Font Rendering =========== */
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-logo-tableau-red:before {
+content: "\e900";
+color: #f00;
+}
+
+.icon-logo-tableau:before {
+content: "\e901";
+}

@@ -1,0 +1,43 @@
+[project]
+name = "06-portfolio-2-0"
+version = "0.1.0"
+description = "Portfolio 2.0"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=2.3.2",
+    "flask-login>=0.6.2",
+    "flask-mail>=0.9.1",
+    "flask-migrate>=4.0.4",
+    "flask-sqlalchemy>=3.0.5",
+    "flask-wtf>=1.1.1",
+    "flask-markdown>=0.3",
+    "gunicorn<23.0.0",
+    "werkzeug>=2.3.6",
+    "psycopg2-binary>=2.9.7",
+    "sqlalchemy>=2.0.20",
+    "meilisearch>=0.30.0",
+    "alembic>=1.11.3",
+    "python-dotenv>=1.0.0",
+    "python-slugify>=8.0.1",
+    "readtime>=3.0.0",
+    "cutecharts>=1.2.0",
+    "babel>=2.12.1",
+    "email-validator>=2.0.0",
+    "requests>=2.31.0",
+    "pyyaml>=6.0.2",
+    "pillow>=11.0.0",
+    "pandas>=2.1.4",
+    "numpy>=1.26.2",
+    "openpyxl>=3.1.2",
+    "jinja2>=3.1.2",
+    "markupsafe>=2.1.3",
+    "itsdangerous>=2.1.2",
+    "click>=8.1.6",
+    "urllib3<2.0.0",
+    "python-frontmatter>=1.1.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

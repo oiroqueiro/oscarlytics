@@ -1,0 +1,628 @@
+{
+  "languages": [
+    {
+      "language": "en"
+    },
+    {
+      "language": "es"
+    }
+  ],
+  "portfolio": [
+    {
+      "template": NaN,
+      "variable": "menu_home",
+      "language": "en",
+      "value": "Home"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_about",
+      "language": "en",
+      "value": "About"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_projects",
+      "language": "en",
+      "value": "Projects"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_contact",
+      "language": "en",
+      "value": "Contact"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_manage",
+      "language": "en",
+      "value": "Manage Content"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_manage_home",
+      "language": "en",
+      "value": "Edit Home"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_manage_about",
+      "language": "en",
+      "value": "Edit About"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_manage_projects",
+      "language": "en",
+      "value": "Edit Projects"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_manage_contact",
+      "language": "en",
+      "value": "Edit Contact"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_manage_logout",
+      "language": "en",
+      "value": "Logout"
+    },
+    {
+      "template": NaN,
+      "variable": "get_touch",
+      "language": "en",
+      "value": "Get in touch"
+    },
+    {
+      "template": NaN,
+      "variable": "foot",
+      "language": "en",
+      "value": "Follow me"
+    },
+    {
+      "template": NaN,
+      "variable": "signin",
+      "language": "en",
+      "value": "Sign In"
+    },
+    {
+      "template": NaN,
+      "variable": "username",
+      "language": "en",
+      "value": "Username"
+    },
+    {
+      "template": NaN,
+      "variable": "password",
+      "language": "en",
+      "value": "Password"
+    },
+    {
+      "template": NaN,
+      "variable": "rememberme",
+      "language": "en",
+      "value": "Remember Me"
+    },
+    {
+      "template": NaN,
+      "variable": "errorlogin",
+      "language": "en",
+      "value": "Invalid username or password"
+    },
+    {
+      "template": NaN,
+      "variable": "more",
+      "language": "en",
+      "value": "Read more"
+    },
+    {
+      "template": NaN,
+      "variable": "previous",
+      "language": "en",
+      "value": "Previous"
+    },
+    {
+      "template": NaN,
+      "variable": "next",
+      "language": "en",
+      "value": "Next"
+    },
+    {
+      "template": NaN,
+      "variable": "read",
+      "language": "en",
+      "value": "read"
+    },
+    {
+      "template": NaN,
+      "variable": "keyw_title",
+      "language": "en",
+      "value": "Keywords"
+    },
+    {
+      "template": NaN,
+      "variable": "search",
+      "language": "en",
+      "value": "Type & Hit Enter to search projects…"
+    },
+    {
+      "template": NaN,
+      "variable": "search_keyw",
+      "language": "en",
+      "value": "Search keywords..."
+    },
+    {
+      "template": NaN,
+      "variable": "error",
+      "language": "en",
+      "value": "Something went wrong"
+    },
+    {
+      "template": NaN,
+      "variable": "error_subtitle",
+      "language": "en",
+      "value": "This is strange, but I couldn't catch where you wanted to go. \nPlease, return to home and use the available options."
+    },
+    {
+      "template": NaN,
+      "variable": "back_home",
+      "language": "en",
+      "value": "Back To Home"
+    },
+    {
+      "template": NaN,
+      "variable": "404_error",
+      "language": "en",
+      "value": "404 Page Not Found!"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_home",
+      "language": "es",
+      "value": "Inicio"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_about",
+      "language": "es",
+      "value": "Sobre mí"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_projects",
+      "language": "es",
+      "value": "Proyectos"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_contact",
+      "language": "es",
+      "value": "Contacto"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_manage",
+      "language": "es",
+      "value": "Gestionar Contenido"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_manage_home",
+      "language": "es",
+      "value": "Editar Inicio"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_manage_about",
+      "language": "es",
+      "value": "Editar Sobre Mí"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_manage_projects",
+      "language": "es",
+      "value": "Editar Proyectos"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_manage_contact",
+      "language": "es",
+      "value": "Editar Contacto"
+    },
+    {
+      "template": NaN,
+      "variable": "menu_manage_logout",
+      "language": "es",
+      "value": "Cerrar Sesión"
+    },
+    {
+      "template": NaN,
+      "variable": "get_touch",
+      "language": "es",
+      "value": "Ponte en contacto"
+    },
+    {
+      "template": NaN,
+      "variable": "foot",
+      "language": "es",
+      "value": "Sígueme"
+    },
+    {
+      "template": NaN,
+      "variable": "signin",
+      "language": "es",
+      "value": "Inicio Sesión"
+    },
+    {
+      "template": NaN,
+      "variable": "username",
+      "language": "es",
+      "value": "Nombre de Usuario"
+    },
+    {
+      "template": NaN,
+      "variable": "password",
+      "language": "es",
+      "value": "Contraseña"
+    },
+    {
+      "template": NaN,
+      "variable": "rememberme",
+      "language": "es",
+      "value": "Recuérdame"
+    },
+    {
+      "template": NaN,
+      "variable": "errorlogin",
+      "language": "es",
+      "value": "Nombre de Usuario o Contraseña no válidos"
+    },
+    {
+      "template": NaN,
+      "variable": "more",
+      "language": "es",
+      "value": "Leer más"
+    },
+    {
+      "template": NaN,
+      "variable": "keyw_title",
+      "language": "es",
+      "value": "Palabras clave"
+    },
+    {
+      "template": NaN,
+      "variable": "previous",
+      "language": "es",
+      "value": "Anterior"
+    },
+    {
+      "template": NaN,
+      "variable": "next",
+      "language": "es",
+      "value": "Siguiente"
+    },
+    {
+      "template": NaN,
+      "variable": "read",
+      "language": "es",
+      "value": "lectura"
+    },
+    {
+      "template": NaN,
+      "variable": "search",
+      "language": "es",
+      "value": "Escribe y pulsa Enter para buscar projectos…"
+    },
+    {
+      "template": NaN,
+      "variable": "search_keyw",
+      "language": "es",
+      "value": "Buscar palabras clave…"
+    },
+    {
+      "template": NaN,
+      "variable": "error",
+      "language": "es",
+      "value": "Algo ha ido mal."
+    },
+    {
+      "template": NaN,
+      "variable": "error_subtitle",
+      "language": "es",
+      "value": "Esto es extraño, pero no pude entender a dónde querías ir. \nPor favor, vuelve a la página principal y usa las opciones disponibles."
+    },
+    {
+      "template": NaN,
+      "variable": "back_home",
+      "language": "es",
+      "value": "Volver A Inicio"
+    },
+    {
+      "template": NaN,
+      "variable": "404_error",
+      "language": "es",
+      "value": "404 Página no encontrada!"
+    }
+  ],
+  "content": [
+    {
+      "template": "index",
+      "variable": "hello",
+      "language": "en",
+      "value": "Hey, I’m"
+    },
+    {
+      "template": "index",
+      "variable": "name",
+      "language": "en",
+      "value": "Oscar Iglesias"
+    },
+    {
+      "template": "index",
+      "variable": "subtitle",
+      "language": "en",
+      "value": "Data Analyst & ERP Developer Analyst. Welcome to my Portfolio."
+    },
+    {
+      "template": "index",
+      "variable": "hello",
+      "language": "es",
+      "value": "Hola, soy"
+    },
+    {
+      "template": "index",
+      "variable": "name",
+      "language": "es",
+      "value": "Oscar Iglesias"
+    },
+    {
+      "template": "index",
+      "variable": "subtitle",
+      "language": "es",
+      "value": "Analista de Datos & Analista Desarrollador de ERP. Bienvenid@ a mi Portfolio."
+    },
+    {
+      "template": "about",
+      "variable": "hello",
+      "language": "en",
+      "value": "Hi,I’m Oscar Iglesias, Data Analyst and ERP Analyst Developer"
+    },
+    {
+      "template": "about",
+      "variable": "parragraph1",
+      "language": "en",
+      "value": "I'm living in Ourense, a small city of Spain with my wife and 2 little girls born during the COVID pandemic. This doesn’t give me much free time to dedicate to my projects but even like this, I could finish all that you can see in this portfolio."
+    },
+    {
+      "template": "about",
+      "variable": "parragraph2",
+      "language": "en",
+      "value": "I love working with data. During my professional experience, I got the chance to work with many types of databases and acquire a great experience helping stakeholders to get more information and discover good insights because of my skills in visualisation as well."
+    },
+    {
+      "template": "about",
+      "variable": "parragraph3",
+      "language": "en",
+      "value": "Then, when my youngest baby was ready to be born I had the chance to join [**Ironhack**](https://www.ironhack.com/es/en/data-analytics/remote) to improve my skills of data mining and learn much more about analysis and artificial intelligence. \nDuring this time I had to face many challenges that the teaching team provided us which I could solve, making me feel more confident with my skills and learning and creating projects (like my final project, Ironhack repository) that could help others to improve their skills too.\n"
+    },
+    {
+      "template": "about",
+      "variable": "parragraph4",
+      "language": "en",
+      "value": "I consider myself a **team player** with great **adaptability** and **autonomy** as I had to learn almost by myself and start to create features for different ERP along the years. \nMy work colleagues would say I am a *hard-working* person that doesn’t hesitate to **help** others when they need to deliver an urgent job so they can reach on time."
+    },
+    {
+      "template": "about",
+      "variable": "parragraph5",
+      "language": "en",
+      "value": "During my career I helped companies to manage their ERPs and Data so their employees, my colleagues in many cases, could dedicate more time to other tasks and be more productive.\nHere's a snapshot of my technical expertise:\n<ul>\n<li>SQL Mastery (20+ Years):</li>  \nWith a robust foundation in Oracle, followed by over 15 years of expertise in SQL Server, MySQL, and PostgreSQL, I've demonstrated proficiency in crafting intricate queries, developing stored procedures, creating views, functions, and excelling in reporting, ETL, and data mining.  \n  \n<li>Business Intelligence Proficiency (13+ Years):</li>  \nI've accumulated over a decade of experience in Business Intelligence, primarily with Qlikview. Additionally, I'm adept at leveraging tools like Tableau and Power BI. My expertise lies in modeling and crafting visually compelling dashboards and visualizations that drive informed decision-making.  \n  \n<li>Reporting Expertise (14+ Years with SRSS, 7+ Years with Qlik Nprinting):</li>  \nWith extensive experience spanning over 14 years in SQL Server Reporting Services (SRSS) and more than 7 years with Qlik NPrinting, I've honed my skills in creating comprehensive and insightful reports that cater to diverse business needs.  \n  \n<li>ERP Dominance (25+ Years):</li>  \nMy journey involves a comprehensive understanding and development experience with various ERP platforms. From Oracle Developer to Microsoft Dynamics NAV, Microsoft Dynamics CRM, and Microsoft Dynamics AX, I bring over 25 years of in-depth analysis and development expertise.\n  \n<p>   \n</p>\n<b>Additional Skills:</b>   \n<p>   \n</p>\n   \n<li>Python and Machine Learning (1+ Year):</li>\nI've recently ventured into the realm of Python and machine learning, gaining proficiency in Flask for web development and exploring the applications of machine learning algorithms in enhancing business processes.\n\n<li>Docker (Few Months):</li>\nI've also delved into Docker, leveraging its containerization capabilities to streamline application deployment and management processes.\n\n</ul>\n\n"
+    },
+    {
+      "template": "about",
+      "variable": "parragraph6",
+      "language": "en",
+      "value": "And, finally, a visualization of the projects present in this portfolio."
+    },
+    {
+      "template": "about",
+      "variable": "skills_title",
+      "language": "en",
+      "value": "My Skills"
+    },
+    {
+      "template": "about",
+      "variable": "skill1",
+      "language": "en",
+      "value": "Creative Problem Solving."
+    },
+    {
+      "template": "about",
+      "variable": "skill2",
+      "language": "en",
+      "value": "Responsible."
+    },
+    {
+      "template": "about",
+      "variable": "skill3",
+      "language": "en",
+      "value": "Adaptability."
+    },
+    {
+      "template": "about",
+      "variable": "youtube",
+      "language": "en",
+      "value": NaN
+    },
+    {
+      "template": "about",
+      "variable": "hello",
+      "language": "es",
+      "value": "Hola, soy Oscar Iglesias, Analista de Datos y Analista Desarrollador de ERP."
+    },
+    {
+      "template": "about",
+      "variable": "parragraph1",
+      "language": "es",
+      "value": "Estoy viviendo Ourense, una pequeña ciudad de España con mi mujer y mis dos niñas nacidas durante la pandemia del COVID. Esto no me deja mucho tiempo libre para dedicarle a mis proyectos pero aún así, pude finalizar todo lo que podéis ver en este portafolio."
+    },
+    {
+      "template": "about",
+      "variable": "parragraph2",
+      "language": "es",
+      "value": "Me encanta trabajar con datos. Durante toda mi carrera profesional, tuve la oportunidad de trabajar con muchos tipos de bases de datos y adquirir una gran experiencia ayudando a las partes interesadas a obtener más información y descrubrir claves esclarecedoras debido, también, a mis habilidades en visualización de datos."
+    },
+    {
+      "template": "about",
+      "variable": "parragraph3",
+      "language": "es",
+      "value": "Entonces, cuando mi hija más pequeña estaba preparada para nacer, tuve la oportunidad de unirme al bootcamp de análisis de datos de [**Ironhack**](https://www.ironhack.com/es/en/data-analytics/remote) para mejorar mis habilidades de minería de datos y aprender mucho más de análisis e inteligencia artificial. \nDurante este tiempo tuve que superar muchos retos que el equipo de enseñanza nos propuso, haciéndome sentir más confianza en mis habilidades y aprendiendo y creando proyectos (como mi proyecto final, Ironhack repository) que podrían ayudar a otros también a incrementar sus habilidades."
+    },
+    {
+      "template": "about",
+      "variable": "parragraph4",
+      "language": "es",
+      "value": "Me considero a mi mismo un **buen compañero de trabajo** con gran **adaptabilidad** y **autonomía** ya que he tenido que aprender por mi mismo a crear nuevas funcionalidades en los diferentes ERP a lo largo de los años. Mis compañeros de trabajo dirían que soy una *persona trabajadora* que no duda en **ayudar** a otros cuando lo necesitan."
+    },
+    {
+      "template": "about",
+      "variable": "parragraph5",
+      "language": "es",
+      "value": "Durante mi carrera he ayudado a muchas empresas a manejar su ERP y datos de manera que sus empleados, y en muchos casos mis compañeros, podían dedicar más tiempo a otras tareas y ser más productivos.\nAquí hay una instantánea de mi experiencia técnica:\n<ul>  \n<li>Dominio de SQL (más de 20 años):</li>  \nCon una base sólida en Oracle, seguida de más de 15 años de experiencia en SQL Server, MySQL y PostgreSQL, he demostrado competencia en la elaboración de consultas complejas, el desarrollo de procedimientos almacenados, la creación de vistas, funciones y sobresaliendo en informes, ETL y procesamiento de datos.  \n  \n<li>Competencia en inteligencia empresarial (más de 13 años):</li>  \nHe acumulado más de una década de experiencia en Business Intelligence, principalmente con Qlikview. Además, soy experto en aprovechar herramientas como Tableau y Power BI. Mi experiencia radica en modelar y crear paneles y visualizaciones visualmente atractivos que impulsen la toma de decisiones informadas.  \n  \n<li>Experiencia en generación de informes (más de 14 años con SRSS, más de 7 años con Qlik Nprinting):</li>  \nCon una amplia experiencia que abarca más de 14 años en SQL Server Reporting Services (SRSS) y más de 7 años en Qlik NPrinting, he perfeccionado mis habilidades en la creación de informes completos y reveladores que satisfacen diversas necesidades empresariales.  \n  \n<li>Dominio de ERP (más de 25 años):</li>  \nMi viaje implica una comprensión integral y una experiencia de desarrollo con varias plataformas ERP. Desde Oracle Developer hasta Microsoft Dynamics NAV, Microsoft Dynamics CRM y Microsoft Dynamics AX, aporto más de 25 años de experiencia en análisis y desarrollo en profundidad.\n  \n<p>  \n</p>\n<b>Habilidades adicionales:</b>  \n<p>  \n</p>\n  \n<li>Python y Aprendizaje Automático (más de 1 año):</li>  \nRecientemente me aventuré en el ámbito de Python y aprendizaje automático, ganando competencias en Flask para el desarrollo web y explorándo la aplicación de algoritmos de aprendizaje automático para mejorar los procesos comerciales.  \n\n<li>Docker (Algunos Meses):</li>  \nTambién profundicé en Docker, aprovechando sus capacidades de contenedorización para optimizar los procesos de implementación y administración de aplicaciones.  \n</ul> "
+    },
+    {
+      "template": "about",
+      "variable": "parragraph6",
+      "language": "es",
+      "value": "Y, finalmente, una visualización de los proyectos presentes en este portafolio."
+    },
+    {
+      "template": "about",
+      "variable": "skills_title",
+      "language": "es",
+      "value": "Mis habilidades"
+    },
+    {
+      "template": "about",
+      "variable": "skill1",
+      "language": "es",
+      "value": "Resolución creativa de problemas."
+    },
+    {
+      "template": "about",
+      "variable": "skill2",
+      "language": "es",
+      "value": "Responsable."
+    },
+    {
+      "template": "about",
+      "variable": "skill3",
+      "language": "es",
+      "value": "Adaptabilidad."
+    },
+    {
+      "template": "about",
+      "variable": "youtube",
+      "language": "es",
+      "value": NaN
+    },
+    {
+      "template": "contact",
+      "variable": "title",
+      "language": "en",
+      "value": "Let's Connect"
+    },
+    {
+      "template": "contact",
+      "variable": "subtitle",
+      "language": "en",
+      "value": "I'm excited to hear from you! Whether you have a project in mind, want to collaborate, or simply want to say hello, don't hesitate to reach out. Your ideas and thoughts matter, and I'm here to ensure your experience is exceptional. Feel free to get in touch – I'm just an email away."
+    },
+    {
+      "template": "contact",
+      "variable": "first_name",
+      "language": "en",
+      "value": "First Name"
+    },
+    {
+      "template": "contact",
+      "variable": "last_name",
+      "language": "en",
+      "value": "Last Name"
+    },
+    {
+      "template": "contact",
+      "variable": "email",
+      "language": "en",
+      "value": "Email"
+    },
+    {
+      "template": "contact",
+      "variable": "message",
+      "language": "en",
+      "value": "Type your message..."
+    },
+    {
+      "template": "contact",
+      "variable": "submit",
+      "language": "en",
+      "value": "Submit message"
+    },
+    {
+      "template": "contact",
+      "variable": "email_subject",
+      "language": "en",
+      "value": "New message from Oscarlytics portfolio"
+    },
+    {
+      "template": "contact",
+      "variable": "title",
+      "language": "es",
+      "value": "Vamos a conectar"
+    },
+    {
+      "template": "contact",
+      "variable": "subtitle",
+      "language": "es",
+      "value": "¡Estoy deseando saber de ti! Ya sea que tengas un proyecto en mente, quieras colaborar o simplemente quieras saludar, no dudes en comunicarte. Tus ideas y pensamientos importan, y estoy aquí para asegurar que tu experiencia sea excepcional. No dudes en ponerte en contacto, estoy a solo un correo electrónico de distancia."
+    },
+    {
+      "template": "contact",
+      "variable": "first_name",
+      "language": "es",
+      "value": "Nombre"
+    },
+    {
+      "template": "contact",
+      "variable": "last_name",
+      "language": "es",
+      "value": "Apellidos"
+    },
+    {
+      "template": "contact",
+      "variable": "email",
+      "language": "es",
+      "value": "Correo Electrónico"
+    },
+    {
+      "template": "contact",
+      "variable": "message",
+      "language": "es",
+      "value": "Escribe tu mensaje..."
+    },
+    {
+      "template": "contact",
+      "variable": "submit",
+      "language": "es",
+      "value": "Enviar mensaje"
+    },
+    {
+      "template": "contact",
+      "variable": "email_subject",
+      "language": "es",
+      "value": "Nuevo mensaje desde el portfolio Oscarlytics"
+    }
+  ],
+  "projects": [
+    {
+      "date": 

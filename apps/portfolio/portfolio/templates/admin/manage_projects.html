@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section pt-5">
+    <div class="container">
+        <div class="row section pt-0">
+            <div class="col-12 col-lg-10 mx-auto">
+
+                <div class="mb-4">
+                    <a href="{{ url_for('dashboard', lang=lang) }}" class="text-decoration-none text-muted">
+                        <i class="fas fa-arrow-left"></i> {{ t.admin_back_dashboard }}
+                    </a>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h2 fw-light mb-0">{{ t.admin_manage_title }}</h1>
+                    <a href="{{ url_for('upload_project', lang=lang) }}" class="btn btn-outline-primary">
+                        <i class="fas fa-plus"></i> {{ t.admin_new_project }}
+                    </a>
+                </div>
+
+                <div class="card border-0 shadow-sm mb-5">
+                    <div class="card-body p-4">
+                        <h5 class="card-title text-primary"><i class="fas fa-file-alt"></i> {{ t.admin_base_texts }}
+                        </h5>
+                        <p class="text-muted small mb-4">{{ t.admin_base_texts_desc }}</p>
+
+                        <div class="alert alert-info border-0">
+                            <i class="fas fa-info-circle me-2"></i> {{ t.admin_current_translation }} <strong>{{ lang |
+                                upper }}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h5 class="card-title mb-4"><i class="fas fa-folder-open"></i> {{
+                            t.admin_published_projects }}</h5>
+
+                        <div class="table-responsive content">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 15%;">{{ t.admin_table_date }}</th>
+                                        <th scope="col" style="width: 25%;">{{ t.admin_table_title }}</th>
+                                        <th scope="col" style="width: 40%;">{{ t.admin_table_tags }}</th>
+                                        <th scope="col" class="text-end" style="width: 20%;">{{ t.admin_table_actions }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for proj in projs %}
+                                    <tr>
+                                        <td class="text-muted text-nowrap"><span class="text-uppercase">{{
+                                                get_date_name(lang,proj.date).replace(', ', '<br>')|safe }}</span></td>
+                                        <td><span class="h6 mb-0 fw-semibold">{{ proj.title }}</span></td>
+                                        <td>
+                                            {% for keyw in proj.keywords.split(',') %}
+                                            <a href="{{ url_for('projects', _external=True, lang=lang, keyw=keyw.strip()) }}"
+                                                class="bg-white rounded px-2 py-1 d-inline-block mb-1 me-1 small border text-decoration-none">{{
+                                                keyw.strip() }}</a>
+                                            {% endfor %}
+                                        </td>
+                                        <td class="text-end" style="min-width: 200px;">
+                                            <a href="{{ url_for('project', lang=lang, proj_date=proj.date, proj_n=proj.project_n, title_slug=proj.title_slug) }}"
+                                                class="btn btn-sm btn-outline-primary mb-1 w-100" target="_blank">
+                                                <i class="fas fa-eye"></i> {{ t.admin_view_project }}
+                                            </a>
+                                            <a href="{{ url_for('edit_project', lang=lang, proj_id=proj.id) }}"
+                                                class="btn btn-sm btn-outline-secondary mb-1 w-100">
+                                                <i class="fas fa-edit me-1"></i> {{ t.admin_edit_title if
+                                                t.admin_edit_title else 'Edit Project' }}
+                                            </a>
+                                            <form action="{{ url_for('delete_project', lang=lang, proj_id=proj.id) }}" method="POST" class="d-inline delete-form">
+                                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger w-100">
+                                                    <i class="fas fa-trash me-1"></i> {{ t.admin_delete_btn|default('Delete') }}
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted py-4">
+                                            {{ t.admin_no_projects }} {{ lang | upper }}. {{ t.admin_no_projects_tail }}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var msg = {{ t.admin_delete_confirm|default("Are you sure?")|tojson }};
+    document.querySelectorAll('.delete-form').forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+            if (!confirm(msg)) {
+                e.preventDefault();
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

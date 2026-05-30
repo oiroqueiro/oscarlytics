@@ -1,0 +1,77 @@
+<!-- index.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="section bg-white">
+    <div class="container">
+        <div class="row section pt-0">
+            <div class="col-12 col-lg-9 mx-auto">
+                <picture>
+                    <source
+                        srcset="{{ url_for('static', filename='img/projects/') }}{{ project.image_title }}_545x.webp"
+                        media="(max-width: 575px)">
+                    <source
+                        srcset="{{ url_for('static', filename='img/projects/') }}{{ project.image_title }}_600x.webp"
+                        media="(max-width: 767px)">
+                    <source
+                        srcset="{{ url_for('static', filename='img/projects/') }}{{ project.image_title }}_700x.webp"
+                        media="(max-width: 991px)">
+                    <source
+                        srcset="{{ url_for('static', filename='img/projects/') }}{{ project.image_title }}_1110x.webp">
+                    <img loading="lazy" decoding="async"
+                        src="{{ url_for('static', filename='img/projects/') }}{{ project.image_title }}_1110.jpg"
+                        class=" w-100 card-img-top img-fluid" alt="" width="1200" height="800">
+                </picture>
+
+                <div class="mb-4">
+                    <h1 class="h2 fw-light mb-3">{{ project.title }}</h1>
+                    <div class="d-flex">
+                        <span>{{ get_date_name(lang,project.date)|capitalize }}</span>
+                        <span class="px-3">|</span>
+                        <!--
+                    <span>3 minutes read</span>
+                    -->
+                        <span>{{ time_reading }}</span>
+
+                        <ul class="post-meta list-unstyle">
+                            <li class="text-capitalize ms-4">{{ keyw_title }} :
+
+                                {% set keyw_list = project.keywords.split(',') %}
+
+                                {% for keyw in keyw_list %}
+                                <a class="text-uppercase"
+                                    href="{{ url_for('projects', _external=True, lang=lang, keyw=keyw, proj_date=project.date, proj_n=project_project_n) }}">{{
+                                    keyw }}</a>
+                                <span class="px-1">|</span>
+                                {% endfor %}
+
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="content">
+                        <div class="mb-4">
+                            {{ project.exposition|markdown }}
+                        </div>
+                        {% if project.action %}
+                        <div class="mb-4">
+                            <h2 class="h4 fw-light mb-3">{{ header_action }}</h2>
+                            {{ project.action|markdown }}
+                        </div>
+                        {% endif %}
+                        {% if project.resolution %}
+                        <div class="mb-4">
+                            <h2 class="h4 fw-light mb-3">{{ header_resolution }}</h2>
+                            {{ project.resolution|markdown }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+</section>
+
+
+
+{% endblock %}

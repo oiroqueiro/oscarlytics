@@ -1,0 +1,41 @@
+# --- Persistence and Sovereignty of Data ---
+# We do not want the DB binaries or search indices to leave the PC
+data/
+*.log
+*.sqlite
+*.db
+
+# --- Python and uv ---
+.venv/
+.uv/
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+
+# --- Infrastructure and Secrets ---
+.env
+.env.*
+!.env.example
+# Local certificates (if any)
+*.pem
+*.key
+
+# [CRITICAL] Quadlet Generated Artifacts (Prevent Secret Leaks)
+# Solo las plantillas y archivos base van a Git. 
+# Los archivos que 'setup.sh' enlace o genere con datos reales se ignoran.
+infra/*.generated.*
+
+# --- IDE (Antigravity / VS Code) ---   
+.antigravity/
+.vscode/
+.idea/
+.DS_Store
+
+# --- Content and Personal Assets ---
+# Descomentar estas líneas si se usa un repositorio público para no rastrear tus datos reales
+# apps/portfolio/content/projects/*.md
+# !apps/portfolio/content/projects/2024-01-01-es-proyecto-ejemplo.md
+# !apps/portfolio/content/projects/2024-01-01-en-example-project.md
+# apps/portfolio/portfolio/static/img/projects/*
+# !apps/portfolio/portfolio/static/img/projects/example_project.png

@@ -1,0 +1,27 @@
+<!-- index.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <div class="row align-items-center justify-content-center text-center text-lg-start gy-5">
+      <div class="col-9 col-sm-8 col-md-6 col-lg-5 col-xxl-5">
+        <div class="pe-lg-4 pe-xl-5">
+          <picture>
+            <source  srcset="{{ url_for('static', filename='img/ProfilePicture545x.webp') }}"  media="(max-width: 575px)">
+            <source  srcset="{{ url_for('static', filename='img/ProfilePicture600x.webp') }}"  media="(max-width: 767px)">
+            <source  srcset="{{ url_for('static', filename='img/ProfilePicture700x.webp') }}"  media="(max-width: 991px)">
+            <source  srcset="{{ url_for('static', filename='img/ProfilePicture1110x.webp') }}" >
+
+            <img  loading="lazy" decoding="async" src="{{ url_for('static', filename='img/ProfilePicture1110x.jpg') }}" class="rounded-4" width="964" height="1000">
+          </picture>
+        </div>
+      </div>
+
+      <div class="col-11 col-lg-7 col-xxl-5">
+        <h1 class="display-2 mb-3">{{ hello }}<br/>{{ name }}</h1>
+        <p class="mb-4 pb-2">{{ subtitle }}</p>
+        <a href="{{ url_for('contact', _external=True, lang=lang) }}" class="btn btn-primary">{% block get_touch %}{{get_touch}}{% endblock %}</a>
+      </div>
+    </div>
+{% endblock %}

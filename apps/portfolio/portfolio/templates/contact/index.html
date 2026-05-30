@@ -1,0 +1,61 @@
+<!-- index.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+        <div class="row">
+          <div class="col-12 col-lg-8  mx-auto">
+            <div class="pb-5">
+              <h1 id="contact-me">{{title}}</h1>
+              <p>{{subtitle}}</p>              
+            </div>
+                        
+
+            <form id="contact-form" action="" method="post">
+              <div class="row g-4">
+                <div class="col-md-6 mb-3 mt-0">
+                  <input type="text" class="form-control" placeholder="{{first_name}}" aria-label="{{first_name}}" name="First Name" required>
+                </div>
+                <div class="col-md-6 mb-3 mt-0">
+                  <input type="text" class="form-control" placeholder="{{last_name}}" aria-label="last_name" name="Last Name" required>
+                </div>
+                <div class="col-12 mb-3 mt-0">
+                  <input type="email" class="form-control" placeholder="{{email}}" aria-label="{{email}}" name="Email" required>
+                </div>
+            
+                <div class="col-12 mb-3 mt-0">
+                  <textarea  rows="7" class="form-control mb-4" placeholder="{{message}}" id="floatingTextarea" name="Type your message..." required></textarea>
+                </div>
+                <div class="col-12 mb-3 mt-0">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+                  <button type="submit" class="btn btn-primary btn-md">{{submit}}</button>
+                </div>
+              </div>
+            
+            </form>
+          </form>
+            
+          </div>
+        </div>
+                
+        
+        <!-- Google reCAPTCHA v3 integration -->       
+
+        <script>
+          document.getElementById('contact-form').addEventListener('submit', function(event) {
+              event.preventDefault();
+              grecaptcha.ready(function() {
+                  grecaptcha.execute('{{recaptcha_site_key}}', {action: 'submit'}).then(function(token) {
+                      document.getElementById('g-recaptcha-response').value = token;
+                      document.getElementById('contact-form').submit();
+                  });
+              });
+          });
+        </script>
+
+{% endblock %}
+	
+  
+
+ 

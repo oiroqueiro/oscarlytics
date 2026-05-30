@@ -1,0 +1,9 @@
+[Volume]
+VolumeName=portfolio_db_data
+# We use the environment variable to make it dynamic
+Device="${PWD}/data/portfolio_db"
+Type=none
+Options=bind
+
+[Install]
+WantedBy=default.target
