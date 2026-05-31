@@ -1,7 +1,15 @@
 # 🚀 Portfolio 2.0: The Hardened Stack
 
 ## 🤖 Reflexiones sobre IA y el Desarrollo
-> *[Tu perspectiva personal aquí: Puedes usar este espacio para contar cómo ha sido tu experiencia construyendo y refactorizando esta aplicación desde cero en colaboración con un Agente de IA (Antigravity). ¡El escenario es tuyo!]*
+
+Después de varios años con la versión inicial del portfolio, cumplió su propósito. Ahora he decidido pivotarlo a un laboratorio personal para mis proyectos y para ello, he decidido darle el control de todo a Google Gemini usando Antigravity.
+
+Bajo mis ideas, propósitos y control, Gemini con sus agentes fue el encargado de refactorizar todo mi proyecto inicial sustituyendo los contenedores docker que tenía por contenedores endurecidos podman, además de ciertos cambios y mejoras que tenía en mente.
+
+El resultado ha sido bastante satisfactorio y sin tener que teclear nada (en próximos proyectos retomaré la programación que es algo que me encanta).
+
+Así que prácticamente todo lo que podéis ver en este proyecto ha sido creado por Gemini bajo mi supervisión.
+
 
 A state-of-the-art, high-performance, and **secure-by-design** portfolio infrastructure. This version represents a complete evolution from legacy Docker/Elasticsearch setups to a modern, rootless **Podman** architecture managed via **Quadlets**.
 
