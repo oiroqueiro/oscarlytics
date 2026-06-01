@@ -1,12 +1,21 @@
 #!/bin/bash
 
-# ----- 1. PATHS -----
+# ----- 1. PATHS & DETECTION -----
 PROJECT_DIR=$(cd "$(dirname "$0")/.." && pwd)
-QUADLET_DIR="$HOME/.config/containers/systemd"
 DOTENV_FILE="$PROJECT_DIR/infra/.env"
 
 if [ ! -f "$DOTENV_FILE" ]; then
     DOTENV_FILE="$PROJECT_DIR/.env"
+fi
+
+if [ "$(id -u)" -eq 0 ]; then
+    echo "👤 Running as root. Quadlets will be installed system-wide (global mode)."
+    QUADLET_DIR="/etc/containers/systemd"
+    SYSTEMCTL_CMD="systemctl"
+else
+    echo "👤 Running as non-root user. Quadlets will be installed in rootless mode."
+    QUADLET_DIR="$HOME/.config/containers/systemd"
+    SYSTEMCTL_CMD="systemctl --user"
 fi
 
 cd "$PROJECT_DIR"
@@ -67,25 +76,36 @@ for SRC in "${!FILES[@]}"; do
 done
 
 # ----- 5. LINKS -----
-echo "🔗 Creating links in Quadlet..."
+echo "🔗 Creating links in Quadlet directory ($QUADLET_DIR)..."
 mkdir -p "$QUADLET_DIR"
 # Clean up old portfolio and meilisearch links
 rm -f "$QUADLET_DIR"/portfolio*
 rm -f "$QUADLET_DIR"/meilisearch*
 
-# Link generated files
+# Link generated and static Quadlet files
 ln -sf "$PROJECT_DIR/infra/portfolio.generated.kube"             "$QUADLET_DIR/portfolio.kube"
 ln -sf "$PROJECT_DIR/infra/portfolio.generated.yaml"             "$QUADLET_DIR/portfolio.yaml"
 ln -sf "$PROJECT_DIR/infra/portfolio.generated.network"          "$QUADLET_DIR/portfolio.network"
 ln -sf "$PROJECT_DIR/infra/portfolio_db.generated.volume"        "$QUADLET_DIR/portfolio_db.volume"
 ln -sf "$PROJECT_DIR/infra/portfolio_meilisearch.generated.volume" "$QUADLET_DIR/portfolio_meilisearch.volume"
 ln -sf "$PROJECT_DIR/infra/portfolio_storage.generated.volume"    "$QUADLET_DIR/portfolio_storage.volume"
+ln -sf "$PROJECT_DIR/infra/portfolio_certs.volume"               "$QUADLET_DIR/portfolio_certs.volume"
 
 # ----- 6. ACTIVATION -----
-echo "🚀 Reloading systemd and starting the stack..."
-systemctl --user daemon-reload
-systemctl --user stop portfolio.service 2>/dev/null || true
-systemctl --user start portfolio.service
+echo "🚀 Reloading systemd..."
+$SYSTEMCTL_CMD daemon-reload
+
+echo "🛑 Stopping old service instances if running..."
+$SYSTEMCTL_CMD stop portfolio.service 2>/dev/null || true
+
+echo "🌐 Starting network service (portfolio-network)..."
+$SYSTEMCTL_CMD start portfolio-network.service
+
+echo "💾 Starting persistent volume services..."
+$SYSTEMCTL_CMD start portfolio_db-volume.service portfolio_meilisearch-volume.service portfolio_storage-volume.service portfolio_certs-volume.service
+
+echo "🚀 Starting main portfolio service..."
+$SYSTEMCTL_CMD start portfolio.service
 
 echo "✅ Stack 'portfolio' consolidated and synchronized!"
 echo ""
@@ -94,5 +114,9 @@ echo "🌐 Your application is starting at: http://localhost:8080"
 echo "🔍 Meilisearch is starting at: http://localhost:7700"
 echo "----------------------------------------------------------------"
 echo "To view live logs, you can optionally run:"
-echo "  journalctl --user -u portfolio.service -f"
+if [ "$(id -u)" -eq 0 ]; then
+  echo "  journalctl -u portfolio.service -f"
+else
+  echo "  journalctl --user -u portfolio.service -f"
+fi
 echo "----------------------------------------------------------------"
