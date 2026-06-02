@@ -220,8 +220,8 @@ class Projects(SearchableMixin, db.Model):
     project_n = db.Column(db.Integer)
     languageid = db.Column(db.Integer, db.ForeignKey(
         'languages.id', name='fk_languageid'))
-    title = db.Column(db.String(50), index=True)
-    title_slug = db.Column(db.String(60), unique=False,
+    title = db.Column(db.String(150), index=True)
+    title_slug = db.Column(db.String(200), unique=False,
                            nullable=False, index=True)
     resume = db.Column(db.Text, index=True)
     exposition = db.Column(db.String())
