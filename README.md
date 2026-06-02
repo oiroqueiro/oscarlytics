@@ -1,15 +1,14 @@
 # 🚀 Portfolio 2.0: The Hardened Stack
 
-## 🤖 Reflexiones sobre IA y el Desarrollo
+## 🤖 The Evolution of Oscarlytics
 
-Después de varios años con la versión inicial del portfolio, cumplió su propósito. Ahora he decidido pivotarlo a un laboratorio personal para mis proyectos y para ello, he decidido darle el control de todo a Google Gemini usando Antigravity.
+After several years, the initial version of my portfolio had run its course. I’ve decided to pivot it into a Personal Data Lab—a dedicated space for my projects and technical experiments. To achieve this, I opted for a hands-off orchestration approach: I provided the strategy, the requirements, and the control, while Google Gemini acted as the agent to carry out the heavy lifting.
 
-Bajo mis ideas, propósitos y control, Gemini con sus agentes fue el encargado de refactorizar todo mi proyecto inicial sustituyendo los contenedores docker que tenía por contenedores endurecidos podman, además de ciertos cambios y mejoras que tenía en mente.
+Under my direct supervision, Gemini refactored the entire initial project. This involved migrating from standard Docker containers to hardened, rootless Podman containers, alongside several structural improvements I had planned.
 
-El resultado ha sido bastante satisfactorio y sin tener que teclear nada (en próximos proyectos retomaré la programación que es algo que me encanta).
+The result is highly satisfactory. While I have intentionally stepped back from manual coding for this specific refactor, I remain deeply hands-on; I’ll be returning to the keyboard for upcoming projects, as it’s a craft I enjoy.
 
-Así que prácticamente todo lo que podéis ver en este proyecto ha sido creado por Gemini bajo mi supervisión.
-
+Ultimately, everything you see here is the result of a collaborative loop: I set the architecture and standards, and Gemini handled the implementation under my oversight. This is what modern systems engineering looks like in my workflow.
 
 A state-of-the-art, high-performance, and **secure-by-design** portfolio infrastructure. This version represents a complete evolution from legacy Docker/Elasticsearch setups to a modern, rootless **Podman** architecture managed via **Quadlets**.
 
