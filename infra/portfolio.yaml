@@ -4,7 +4,7 @@ metadata:
   name: portfolio
 spec:
   containers:
-  - image: cgr.dev/chainguard/postgres:latest
+  - image: docker.io/library/postgres:16-alpine
     name: db
     env:
       - name: POSTGRES_DB
@@ -44,7 +44,7 @@ spec:
       - mountPath: /app/portfolio/static/img
         name: portfolio-img-data
   - name: meilisearch
-    image: ${GHCR_REGISTRY}/portfolio-meilisearch:latest
+    image: docker.io/getmeili/meilisearch:v1.12.5
     imagePullPolicy: Always
     env:
       - name: MEILI_HTTP_ADDR

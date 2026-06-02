@@ -104,6 +104,7 @@ if __name__ == '__main__':
     # Push app context so SQLAlchemy works
     portfolio.app_context().push()
     print("🚀 Initializing Database...")
+    db.create_all()
     init_admin()
     init_content()
     init_search()

@@ -1,7 +1,7 @@
 [Volume]
 VolumeName=portfolio_storage_data
 # We use the environment variable to make it dynamic
-Device="${PWD}/data/portfolio_storage"
+Device=${PWD}/data/portfolio_storage
 Type=none
 Options=bind,z
 

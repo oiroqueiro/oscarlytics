@@ -172,8 +172,8 @@ class Content(db.Model):
     __tablename__ = 'portfolio_content'
 
     id = db.Column(db.Integer, primary_key=True)
-    template = db.Column(db.String(20), index=True)
-    variable = db.Column(db.String(20), index=True)
+    template = db.Column(db.String(100), index=True)
+    variable = db.Column(db.String(100), index=True)
     languageid = db.Column(db.Integer, db.ForeignKey(
         'languages.id', name='fk_languageid'))
     value = db.Column(db.Text)

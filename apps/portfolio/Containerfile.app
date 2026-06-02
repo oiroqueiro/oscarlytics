@@ -1,5 +1,5 @@
 # Build stage
-FROM cgr.dev/chainguard/python:latest-dev AS builder
+FROM docker.io/library/python:3.12-slim AS builder
 LABEL version="2.1"
 
 
@@ -16,7 +16,7 @@ COPY pyproject.toml .
 RUN pip install .
 
 # Final stage
-FROM cgr.dev/chainguard/python:latest
+FROM docker.io/library/python:3.12-slim
 
 WORKDIR /app
 

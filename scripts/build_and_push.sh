@@ -8,9 +8,6 @@ cd "$PROJECT_DIR"
 REGISTRY="${GHCR_REGISTRY:-ghcr.io/oiroqueiro}"
 
 # ----- 2. BUILD HARDENED IMAGES -----
-echo "🏗️  Building hardened Meilisearch image..."
-podman build -t "${REGISTRY}/portfolio-meilisearch:latest" -f "$PROJECT_DIR/infra/Containerfile.meilisearch" "$PROJECT_DIR/infra"
-
 echo "🏗️  Building hardened Portfolio App image..."
 podman build -t "${REGISTRY}/portfolio-app:latest" -f "$PROJECT_DIR/apps/portfolio/Containerfile.app" "$PROJECT_DIR/apps/portfolio"
 
@@ -22,7 +19,6 @@ podman build -t "${REGISTRY}/portfolio-acmesh:latest" -f "$PROJECT_DIR/infra/Con
 
 # ----- 3. PUSH IMAGES TO REGISTRY -----
 echo "☁️  Pushing images to registry (${REGISTRY})..."
-podman push "${REGISTRY}/portfolio-meilisearch:latest"
 podman push "${REGISTRY}/portfolio-app:latest"
 podman push "${REGISTRY}/portfolio-nginx:latest"
 podman push "${REGISTRY}/portfolio-acmesh:latest"

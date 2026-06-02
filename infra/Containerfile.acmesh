@@ -1,5 +1,4 @@
-# Hardened acme.sh image for DNS-01 challenge
-FROM cgr.dev/chainguard/wolfi-base:latest
+FROM docker.io/library/alpine:latest
 
 # Install dependencies
 RUN apk update && apk add --no-cache \
