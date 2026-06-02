@@ -59,6 +59,14 @@ La migración a Portafolio 2.0 ha sido un éxito rotundo, logrando los siguiente
 <img src="/static/img/projects/free_h_post.png" class="img-fluid w-100" alt="free -h post"></img>
 *Fig 5. Detalle final del uso de memoria en caliente del servidor VPS con el nuevo stack activo.*
 
+Adicionalmente, realizamos pruebas de estrés HTTP (HTTP Benchmarking) simulando carga concurrente para evaluar la latencia y la capacidad de respuesta global del servidor. Los resultados post-migración demuestran una mejora sustancial en el rendimiento de la web, entregando tiempos de respuesta mucho más estables, menor latencia y cero pérdida de paquetes debido a la ligereza del ecosistema y a la correcta optimización de Nginx.
+
+<img src="/static/img/projects/http_benchmarking_pre.png" class="img-fluid w-100" alt="http benchmarking pre"></img>
+*Fig 6. Pruebas de rendimiento HTTP en la infraestructura anterior.*
+
+<img src="/static/img/projects/http_benchmarking_post.png" class="img-fluid w-100" alt="http benchmarking post"></img>
+*Fig 7. Pruebas de rendimiento HTTP tras la migración y optimización.*
+
 Este proyecto demuestra que es posible diseñar infraestructuras autogestionadas extremadamente seguras y de alto rendimiento sin sobrecargar los recursos del servidor.
 
 El código fuente y las plantillas de esta nueva versión están disponibles en [Mi GitHub](https://github.com/oiroqueiro/oscarlytics). Si quieres conocer más detalles sobre el diseño original de la versión 1.0 (basada en Docker y Elasticsearch), puedes visitar el artículo correspondiente de [Portafolio 1.0](/es/project/2023-12-27/1/portafolio/).

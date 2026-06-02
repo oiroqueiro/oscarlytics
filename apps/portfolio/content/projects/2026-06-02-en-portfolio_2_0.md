@@ -59,6 +59,14 @@ The migration to Portfolio 2.0 has been a resounding success, delivering the fol
 <img src="/static/img/projects/free_h_post.png" class="img-fluid w-100" alt="free -h post"></img>
 *Fig 5. Detail of host memory usage on the VPS with the new stack actively running.*
 
+Additionally, we ran HTTP benchmarking stress tests under concurrent load to evaluate latency and overall response capacity. The post-migration results show a substantial performance improvement, delivering much more stable response times, reduced latency, and zero packet loss due to the lightweight container environment and the optimized Nginx web server configuration.
+
+<img src="/static/img/projects/http_benchmarking_pre.png" class="img-fluid w-100" alt="http benchmarking pre"></img>
+*Fig 6. HTTP benchmarking tests on the legacy infrastructure.*
+
+<img src="/static/img/projects/http_benchmarking_post.png" class="img-fluid w-100" alt="http benchmarking post"></img>
+*Fig 7. HTTP benchmarking tests after migration and optimization.*
+
 This project showcases how to design self-managed, hardened, and highly efficient stacks.
 
 The source code and templates of this new version are available at [My GitHub](https://github.com/oiroqueiro/oscarlytics). If you want to read more about the original version 1.0 design (based on Docker and Elasticsearch), you can check the article for [Portfolio 1.0](/en/project/2023-12-27/1/portfolio/).
