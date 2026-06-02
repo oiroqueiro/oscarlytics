@@ -50,12 +50,6 @@ To migrate to the 2.0 stack, we implemented the following system engineering cha
 <img src="/static/img/projects/htop_post_migration.png" class="img-fluid w-100" alt="htop post"></img>
 *Fig 4. System load averages on the new Podman stack.*
 
-## Resolution
-The migration to Portfolio 2.0 has been a resounding success, delivering the following measurable results:
-- **90% RAM reduction:** The entire stack idle usage dropped from ~1.8 GB to **under 190 MB RAM**.
-- **Rootless operation:** All containers and host service daemons run in user-space without sudo.
-- **Fast Search Indexing:** Meilisearch query times are in single-digit milliseconds, and CPU usage on the VPS host is near 0.1% at idle.
-
 <img src="/static/img/projects/free_h_post.png" class="img-fluid w-100" alt="free -h post"></img>
 *Fig 5. Detail of host memory usage on the VPS with the new stack actively running.*
 
@@ -66,6 +60,12 @@ Additionally, we ran HTTP benchmarking stress tests under concurrent load to eva
 
 <img src="/static/img/projects/http_benchmarking_post.png" class="img-fluid w-100" alt="http benchmarking post"></img>
 *Fig 7. HTTP benchmarking tests after migration and optimization.*
+
+## Resolution
+The migration to Portfolio 2.0 has been a resounding success, delivering the following measurable results:
+- **90% RAM reduction:** The entire stack idle usage dropped from ~1.8 GB to **under 190 MB RAM**.
+- **Rootless operation:** All containers and host service daemons run in user-space without sudo.
+- **Fast Search Indexing:** Meilisearch query times are in single-digit milliseconds, and CPU usage on the VPS host is near 0.1% at idle.
 
 This project showcases how to design self-managed, hardened, and highly efficient stacks.
 

@@ -35,7 +35,7 @@ Para este refactor, decidí plantear la estrategia y la arquitectura yo mismo (e
 ## Acción
 Para llevar a cabo la migración al stack 2.0, se implementaron las siguientes acciones de ingeniería:
 
-1. **Migración de Elasticsearch a Meilisearch:** Reemplazamos el motor de búsqueda por Meilisearch. Al ser un motor ultraligero y de alto rendimiento escrito en Rust, logramos mantener una búsqueda rápida de proyectos pero con una fracción diminuta del consumo de memoria.
+1. **Migración de Elasticsearch a Meilisearch:** Reemplazamos el motor de búsqueda por Meilisearch. Al ser un motor ultraligero y de alto rendimiento escrito en Rust, logramos mantener una búsqueda rápida de proyectos pero con una fraction diminuta del consumo de memoria.
 2. **Migración de Excel a Markdown dinámico:** Eliminamos por completo el uso de Excel. El contenido del portafolio se gestiona ahora a través de ficheros Markdown (`.md`) con metadatos Frontmatter. Un script en Python analiza y sincroniza automáticamente las publicaciones en la base de datos y Meilisearch al iniciar la aplicación.
 3. **Ecosistema Rootless con Podman y Quadlets:** Sustituimos el clásico `docker-compose` por Podman Quadlets, integrados nativamente con el gestor de servicios `systemd` de Linux. La aplicación se ejecuta de forma aislada, sin privilegios root y como un demonio del sistema operativo.
 4. **Contenedores Endurecidos (Hardening):** Aplicamos estrictas políticas de seguridad en cada contenedor:
@@ -50,12 +50,6 @@ Para llevar a cabo la migración al stack 2.0, se implementaron las siguientes a
 <img src="/static/img/projects/htop_post_migration.png" class="img-fluid w-100" alt="htop post"></img>
 *Fig 4. Carga del sistema con el nuevo stack de Podman en producción.*
 
-## Resolución
-La migración a Portafolio 2.0 ha sido un éxito rotundo, logrando los siguientes resultados medibles:
-- **Reducción del 90% en el consumo de RAM:** El stack completo en reposo pasó de requerir casi 1.8 GB a consumir **menos de 190 MB de RAM**.
-- **Cero privilegios de superusuario (root):** Todos los contenedores y el pod se ejecutan en espacio de usuario.
-- **Rendimiento e indexación instantáneos:** La búsqueda de Meilisearch responde en pocos milisegundos y la carga del procesador en el VPS host se mantiene cercana al 0.1% en reposo.
-
 <img src="/static/img/projects/free_h_post.png" class="img-fluid w-100" alt="free -h post"></img>
 *Fig 5. Detalle final del uso de memoria en caliente del servidor VPS con el nuevo stack activo.*
 
@@ -66,6 +60,12 @@ Adicionalmente, realizamos pruebas de estrés HTTP (HTTP Benchmarking) simulando
 
 <img src="/static/img/projects/http_benchmarking_post.png" class="img-fluid w-100" alt="http benchmarking post"></img>
 *Fig 7. Pruebas de rendimiento HTTP tras la migración y optimización.*
+
+## Resolución
+La migración a Portafolio 2.0 ha sido un éxito rotundo, logrando los siguientes resultados medibles:
+- **Reducción del 90% en el consumo de RAM:** El stack completo en reposo pasó de requerir casi 1.8 GB a consumir **menos de 190 MB de RAM**.
+- **Cero privilegios de superusuario (root):** Todos los contenedores y el pod se ejecutan en espacio de usuario.
+- **Rendimiento e indexación instantáneos:** La búsqueda de Meilisearch responde en pocos milisegundos y la carga del procesador en el VPS host se mantiene cercana al 0.1% en reposo.
 
 Este proyecto demuestra que es posible diseñar infraestructuras autogestionadas extremadamente seguras y de alto rendimiento sin sobrecargar los recursos del servidor.
 
