@@ -10,7 +10,8 @@ image2: ""
 image3: ""
 image4: ""
 image5: ""
-link1: "https://github.com/oiroqueiro/portfolio"
+link1: "https://github.com/oiroqueiro/oscarlytics"
+link2: "/en/project/2023-12-27/1/portfolio/"
 ---
 
 ## Resume
@@ -58,4 +59,6 @@ The migration to Portfolio 2.0 has been a resounding success, delivering the fol
 <img src="/static/img/projects/free_h_post.png" class="img-fluid w-100" alt="free -h post"></img>
 *Fig 5. Detail of host memory usage on the VPS with the new stack actively running.*
 
-This project showcases how to design self-managed, hardened, and highly efficient stacks. The source code and templates are available at [My Github](https://github.com/oiroqueiro/portfolio).
+This project showcases how to design self-managed, hardened, and highly efficient stacks.
+
+The source code and templates of this new version are available at [My GitHub](https://github.com/oiroqueiro/oscarlytics). If you want to read more about the original version 1.0 design (based on Docker and Elasticsearch), you can check the article for [Portfolio 1.0](/en/project/2023-12-27/1/portfolio/).

@@ -10,7 +10,8 @@ image2: ""
 image3: ""
 image4: ""
 image5: ""
-link1: "https://github.com/oiroqueiro/portfolio"
+link1: "https://github.com/oiroqueiro/oscarlytics"
+link2: "/es/project/2023-12-27/1/portafolio/"
 ---
 
 ## Resumen
@@ -58,4 +59,6 @@ La migración a Portafolio 2.0 ha sido un éxito rotundo, logrando los siguiente
 <img src="/static/img/projects/free_h_post.png" class="img-fluid w-100" alt="free -h post"></img>
 *Fig 5. Detalle final del uso de memoria en caliente del servidor VPS con el nuevo stack activo.*
 
-Este proyecto demuestra que es posible diseñar infraestructuras autogestionadas extremadamente seguras y de alto rendimiento sin sobrecargar los recursos del servidor. El código fuente y las plantillas están disponibles en [Mi Github](https://github.com/oiroqueiro/portfolio).
+Este proyecto demuestra que es posible diseñar infraestructuras autogestionadas extremadamente seguras y de alto rendimiento sin sobrecargar los recursos del servidor.
+
+El código fuente y las plantillas de esta nueva versión están disponibles en [Mi GitHub](https://github.com/oiroqueiro/oscarlytics). Si quieres conocer más detalles sobre el diseño original de la versión 1.0 (basada en Docker y Elasticsearch), puedes visitar el artículo correspondiente de [Portafolio 1.0](/es/project/2023-12-27/1/portafolio/).
