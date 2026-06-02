@@ -1,55 +1,86 @@
-# 🚀 Portfolio 2.0: The Hardened Stack
+<p align="center">
+  <img src="examples/img/logo.png" alt="Oscarlytics Logo" width="240">
+</p>
 
-## 🤖 The Evolution of Oscarlytics
+# 🚀 Portfolio 2.0: The Hardened Stack (Oscarlytics)
 
-After several years, the initial version of my portfolio had run its course. I’ve decided to pivot it into a Personal Data Lab—a dedicated space for my projects and technical experiments. To achieve this, I opted for a hands-off orchestration approach: I provided the strategy, the requirements, and the control, while Google Gemini acted as the agent to carry out the heavy lifting.
+> Developed by **Gemini (Antigravity)**. Managed and supervised by **Oscar Iglesias Roqueiro** (@oiroqueiro).
 
-Under my direct supervision, Gemini refactored the entire initial project. This involved migrating from standard Docker containers to hardened, rootless Podman containers, alongside several structural improvements I had planned.
+A state-of-the-art, high-performance, and **secure-by-design** portfolio infrastructure. This version represents a complete evolution from the legacy Docker/Elasticsearch setup (Portfolio 1.0) to a modern, rootless **Podman** architecture managed via **Quadlets** integrated natively with Systemd.
 
-The result is highly satisfactory. While I have intentionally stepped back from manual coding for this specific refactor, I remain deeply hands-on; I’ll be returning to the keyboard for upcoming projects, as it’s a craft I enjoy.
-
-Ultimately, everything you see here is the result of a collaborative loop: I set the architecture and standards, and Gemini handled the implementation under my oversight. This is what modern systems engineering looks like in my workflow.
-
-A state-of-the-art, high-performance, and **secure-by-design** portfolio infrastructure. This version represents a complete evolution from legacy Docker/Elasticsearch setups to a modern, rootless **Podman** architecture managed via **Quadlets**.
+---
 
 ## 📖 History & Background (The Path from Zero to 2.0)
 
-This project began as a journey from zero knowledge of web development to a fully containerized professional deployment. It stands as a testament to **determination, creative problem solving, and adaptability**. I am not originally a UX/Designer or a Web Developer, but I wanted a portfolio that had specific features: Multi-language, Responsive, Light/Dark mode, Customizable, Containerized, and with an Index Search. 
+This project began as a journey from zero knowledge of web development to a fully containerized professional deployment. It stands as a testament to **determination, creative problem solving, and adaptability**.
 
 ### Portfolio 1.0 (The Foundation)
-I started by adapting a static Hugo template into a dynamic website using **Python and Flask**. 
-To make it customizable, I initially used an Excel file to store all the texts and content. For the database, I started with SQLite and evolved to **PostgreSQL**. To power the search functionality, after experimenting with basic SQL queries, I implemented **Elasticsearch**.
-Finally, I containerized the whole application with **Docker**, configuring 4 containers (Postgres, Elastic, App, Nginx) and deploying them to a VPS using **Let's Encrypt** for an A-grade SSL certificate.
+I adapted a static Hugo template into a dynamic website using **Python and Flask**. 
+- To make it customizable, I initially used an Excel file to store all the texts and content.
+- For the database, I started with SQLite and evolved to **PostgreSQL**.
+- To power the search functionality, I implemented **Elasticsearch**.
+- Finally, I containerized the application with **Docker Engine** (Postgres, Elastic, App, Nginx) and deployed it to a VPS.
 
 ### Portfolio 2.0 (The Hardened Evolution)
-Portfolio 2.0 takes all the lessons learned and upgrades the entire ecosystem to modern, secure, and highly efficient standards:
-- **Migration of Data**: Excel was completely removed. Content is now managed entirely through dynamic **Markdown (.md)** files with Frontmatter, loaded on startup and allowing rich media embedding.
-- **Search Engine Upgrade**: Elasticsearch was replaced by **Meilisearch**, which is drastically lighter, faster, and more resource-efficient for this scale.
-- **Maximum Security (Hardened Images)**: The containers are now built using **Wolfi/Chainguard** distroless images, meaning they contain zero unnecessary binaries (not even a shell), reducing the attack surface to a minimum.
-- **Rootless Podman & Quadlets**: The entire stack dropped `docker-compose` in favor of **Podman Quadlets**. It runs entirely in user-space (rootless) and integrates natively with Linux `systemd`. No orchestrator needed; the pods run like any other OS daemon.
-- **High Performance Nginx & SSL**: Nginx is hardened, and SSL is automatically handled via a sidecar `acme.sh` container using the DuckDNS DNS-01 challenge, ensuring a Grade-A certificate without downtime.
+Portfolio 2.0 upgrades the entire ecosystem to modern, secure, and resource-efficient standards:
+- **Migration of Data:** Excel was completely removed. Content is managed dynamically through **Markdown (.md)** files with Frontmatter.
+- **Search Engine Upgrade:** Elasticsearch was replaced by **Meilisearch**, which is drastically lighter and faster.
+- **Maximum Security (Distroless Base Images):** The containers are built using **Wolfi/Chainguard** distroless images (or minimal Alpine bases), reducing the attack surface.
+- **Rootless Podman & Quadlets:** The entire stack dropped `docker-compose` in favor of **Podman Quadlets**. It runs entirely in user-space (rootless) and integrates natively with Linux `systemd`.
+- **High Performance Nginx & SSL:** Nginx is hardened, and SSL is automatically handled via a sidecar `acme.sh` container using the DuckDNS DNS-01 challenge.
 
 ---
 
-## 🛡️ Key Security Pillars
+## 📊 Performance & Resource Comparison (Docker vs. Podman)
 
-### 1. Minimalist Wolfi Images
-Zero unnecessary binaries, reduced attack surface. No `apk`, no shell access in production.
+Here is the visual proof of the massive resource optimization and performance gains achieved during the migration from the legacy Docker Engine + Elasticsearch stack to rootless Podman + Meilisearch.
+
+| Metric / Phase | Pre-Migration (Docker Engine & Elasticsearch) | Post-Migration (Rootless Podman & Meilisearch) |
+| :--- | :---: | :---: |
+| **System Load & htop** | ![htop pre](examples/img/htop_pre_migration.png) | ![htop post](examples/img/htop_post_migration.png) |
+| **Container Stats** | ![docker stats pre](examples/img/docker_stats_pre.png) | ![podman stats post](examples/img/podman_stats_post.png) |
+| **HTTP Benchmarking** | ![bench pre](examples/img/http_benchmarking_pre.png) | ![bench post](examples/img/http_benchmarking_post.png) |
+| **Host Memory Detail** | *N/A (Exceeded 2.5 GB RAM)* | ![free-h post](examples/img/free_h_post.png) |
+
+> [!IMPORTANT]
+> **Summary of Optimization:**
+> - **Memory Footprint:** Dropped from **~1.8 GB RAM** to **under 190 MB RAM** (a **90% reduction**).
+> - **Idle CPU Usage:** Decreased from constant Elasticsearch background indexing spikes to near **0.1% CPU**.
+> - **Security:** Removed root privileges entirely for all running container services.
+
+---
+
+## 🏗️ Architecture & Component Stack
+
+The stack is orchestrated as a single consolidated Pod in production:
+
+| Component | Upstream Image | Base Image | Security Scope |
+| :--- | :--- | :--- | :--- |
+| **Nginx** | `docker.io/library/nginx` | `nginx:alpine` | Direct SSL proxying, custom hardened configuration. |
+| **Flask App** | Custom (Flask/Gunicorn) | `python:3.12-slim` | Runs user application, reads markdown, updates Meilisearch. |
+| **PostgreSQL** | `docker.io/library/postgres` | `postgres:alpine` | Secure relational storage for users, metadata, and logs. |
+| **Meilisearch** | `getmeili/meilisearch` | `getmeili/meilisearch` | Secure, ultra-fast index search. |
+| **ACME.sh** | `neilpang/acme.sh` | `alpine:latest` | Handles automatic SSL generation & DNS-01 validation. |
+
+---
+
+## 🔒 Key Security Pillars
+
+### 1. Minimalist & Non-Root Images
+Containers are built from minimal alpine/python-slim bases with zero compilers or build tools. All execution runs under unprivileged UIDs (`USER 1000`).
 
 ### 2. Rootless Operation
-The entire stack runs in user-space without `sudo` requirements.
+The entire stack runs in user-space without `sudo` requirements, preventing container escapes from affecting the host kernel.
 
 ### 3. Secret Management
-Zero-leak policy. Sensitive data is injected via `.env` and templated in manifests `${VAR}` using `envsubst`. Generated quadlets are ignored by `.gitignore`.
+Sensitive data is injected via `.env` and templated in manifests `${VAR}` using `envsubst`. Generated Quadlet files are kept local and ignored by `.gitignore`.
 
 ### 4. Network Isolation
-Dedicated pod network namespace, isolated from the host and other pods. All containers inside the pod communicate via localhost.
+Communication between Nginx, App, Postgres, and Meilisearch takes place inside the local pod network namespace (all communication via localhost).
 
 ---
 
-## 📁 Project Structure & Data Paths (Where to put your files)
-
-To make updating your portfolio as easy as possible, it is essential to understand where files live, both while developing locally and once deployed in production.
+## 📁 Project Structure & Data Paths
 
 ```text
 ├── apps/portfolio/       # 🐍 Flask Application Logic & Source Code
@@ -59,16 +90,16 @@ To make updating your portfolio as easy as possible, it is essential to understa
 │   ├── portfolio/
 │   │   └── static/
 │   │       └── img/      # 🖼️ LOCAL Images
-│   └── sync_projects.py  # 🔄 The magic script that reads the .md files
+│   └── sync_projects.py  # 🔄 Syncing script that reads the .md files
 │
 ├── infra/                # 🏗️ Infrastructure-as-code
 │   ├── .env              # 🔐 Secrets (Passwords, DuckDNS, Database URLs)
 │   ├── portfolio.yaml    # 📦 Kubernetes-style Podman manifest
-│   └── Containerfiles    # 🐳 Dockerfiles for hardened Wolfi images
+│   └── Containerfiles    # 🐳 Containerfiles for Nginx, ACME.sh, App
 │
 ├── scripts/              # 🤖 Automation & Setup utilities
-│   ├── build_and_push.sh # Compiles images and pushes them to GitHub
-│   ├── deploy_prod.sh    # Deploys the infrastructure on your VPS
+│   ├── build_and_push.sh # Compiles images and pushes them to GHCR
+│   ├── deploy_prod.sh    # Deploys the infrastructure on the VPS
 │   └── setup.sh          # Builds and runs everything locally for testing
 │
 └── data/                 # 🗄️ Persistent volumes (Created automatically, ignored by Git)
@@ -79,23 +110,20 @@ To make updating your portfolio as easy as possible, it is essential to understa
 ```
 
 ### 💻 Local Testing vs 🌍 Production
-There is a big difference between testing on your computer and deploying on your VPS:
 
-**1. Testing Locally (Your Computer):**
-- **Markdown (.md)**: Place your projects inside `apps/portfolio/content/projects/`.
-- **Images**: Place your images inside `apps/portfolio/portfolio/static/img/projects/`.
-- **Why?**: When you run `./scripts/setup.sh`, the system will compile the application and the `sync_projects.py` script will automatically read from these folders and populate your local database. *Note: Git is configured to ignore your personal files so they won't accidentally be pushed to GitHub.*
+1. **Testing Locally (Your Computer):**
+   - **Markdown (.md):** Place your projects inside `apps/portfolio/content/projects/`.
+   - **Images:** Place your images inside `apps/portfolio/portfolio/static/img/projects/`.
+   - **Mechanism:** Run `./scripts/setup.sh`. The system will compile the application and the `sync_projects.py` script will automatically populate your local database from these folders.
 
-**2. Production (Your VPS):**
-- **Markdown (.md)**: Upload your files via SFTP to `~/portfolio_2.0/data/portfolio_storage/projects/`.
-- **Images**: Upload your images via SFTP to `~/portfolio_2.0/data/portfolio_img/projects/`.
-- **Why?**: In production, the source code (`apps/`) doesn't exist on the server. The containers pull the application image from GitHub and mount the `data/` folder as persistent volumes. When the container restarts, it reads the `.md` files directly from the `data/` folder!
+2. **Production (Your VPS):**
+   - **Markdown (.md):** Upload your files via SFTP to `~/portfolio_2.0/data/portfolio_storage/projects/`.
+   - **Images:** Upload your images via SFTP to `~/portfolio_2.0/data/portfolio_img/projects/`.
+   - **Mechanism:** The containers run directly from GHCR and mount the `data/` folder as persistent volumes.
 
 ---
 
 ## 🛠️ Deployment Workflows
-
-This architecture separates the building process from the production deployment using a Container Registry (e.g., GitHub Container Registry).
 
 ### 1. Local Development (All-in-one)
 If you just cloned the repository to test it locally:
@@ -108,80 +136,52 @@ chmod +x scripts/setup.sh
 *Your local `.md` files in `apps/portfolio/content/projects/` will be automatically synced to the database on startup!*
 
 ### 1.1 Local Iteration (Fast Rebuild)
-If you are developing locally and want to test changes made to application files (like `HTML` templates, `CSS`, or the `content.yaml` file), you can quickly rebuild the app image and restart the pod without tearing down the entire environment:
+To quickly rebuild the application image and restart the pod without tearing down the entire environment:
 ```bash
 chmod +x scripts/rebuild_app.sh
 ./scripts/rebuild_app.sh
 ```
-*Note: This is only needed for files baked into the image (source code). Markdown files and images in `data/` update instantly.*
 
 ### 2. Build & Push to Registry
 When you have a new version ready to release, build it and push it to GHCR:
 ```bash
-# Ensure GHCR_REGISTRY in your infra/.env points to: ghcr.io/your-username
 chmod +x scripts/build_and_push.sh
 ./scripts/build_and_push.sh
 ```
 
 ### 3. Pure Production Deployment (No Source Code)
-On the production server, you don't need to clone the full repository. You only need the `infra/` folder, the `.env` file, and the deployment script:
+On the production server, you only need the `infra/` folder, the `.env` file, and the deployment script:
 ```bash
 chmod +x scripts/deploy_prod.sh
 ./scripts/deploy_prod.sh
 ```
-*Podman will automatically download the hardened images from your registry and set up the systemd services.*
 
-### 4. Upload Content (Production)
-Log into the application as an admin using the credentials you defined in `.env`.
-Go to the **Admin Dashboard** and use the **Upload Markdown Project** feature to easily upload your `.md` projects. Alternatively, upload them via SFTP to the `data/portfolio_storage/projects/` folder and they will be indexed automatically on startup.
+---
 
 ## ✍️ Writing Content (The Markdown Manual)
-
-Portfolio 2.0 uses Markdown for project content, completely replacing the old Excel-based approach. The system automatically reads, parses, and loads `.md` files on startup.
 
 ### 1. Naming Convention
 Files must follow this exact format:
 `YYYY-MM-DD-lang-projectname.md`
-- **YYYY-MM-DD**: Release date (e.g., `2024-01-01`).
-- **lang**: Two-letter language code (`es` or `en`).
-- **projectname**: Any descriptive slug (e.g., `my-cool-project`).
+- **YYYY-MM-DD:** Release date (e.g., `2024-01-01`).
+- **lang:** Two-letter language code (`es` or `en`).
+- **projectname:** Descriptive slug (e.g., `my-cool-project`).
 
-*Example:* `2024-02-23-es-portfolio_2.0.md`
+*Example:* `2026-03-01-es-gestion-contenido-en-web.md`
 
 ### 2. Frontmatter (Metadata)
-Every `.md` file MUST start with a YAML block (Frontmatter) enclosed in `---`. This replaces the columns of the old Excel file.
+Every `.md` file MUST start with a YAML block (Frontmatter) enclosed in `---`:
 ```yaml
 ---
 title: "Módulo de Gestión de Contenido en MarkDown"
 language: es
-date: 2024-02-23
+date: 2026-03-01
 project_n: 1
 keywords: python, flask, markdown, seo
 image_title: portfolio_admin
 image1: mockup_admin_panel.png
 link1: https://github.com/roque/nuevo_portfolio
 ---
-```
-- **project_n**: Number of the project if multiple released on the same date.
-- **image1, image2, image3**: Names of the images stored in `apps/portfolio/portfolio/static/img/projects/` (or `data/portfolio_img/projects/` in production). Don't include the full path, just the filename (e.g., `my_image.webp`).
-
-### 3. Writing the Content (Body)
-Below the second `---`, you write your project description using standard Markdown and/or HTML.
-
-**Formatting Text:**
-Use standard Markdown for `**bold**`, `*italics*`, `[links](http...)`, and `## headings`. The system automatically renders this beautifully while maintaining SEO hierarchy.
-
-**Embedding Images:**
-Because we allow raw HTML mixed with Markdown, you can embed your project images dynamically within the text! Use the `<img>` tag and point to the static folder:
-```html
-<img src="/static/img/projects/mockup_admin_panel.png" alt="Admin Panel"></img>
-*Fig 1. Captura del nuevo panel*.
-```
-
-**Embedding Videos:**
-You can directly paste YouTube/Vimeo iframes:
-```html
-<iframe width="560" height="315" src="https://www.youtube.com/embed/XXXXXX" frameborder="0" allowfullscreen></iframe>
 ```
 
 ---
@@ -190,9 +190,10 @@ You can directly paste YouTube/Vimeo iframes:
 
 | Action | Command |
 | :--- | :--- |
-| **Status** | `systemctl --user status portfolio` |
+| **Status** | `systemctl --user status portfolio.service` |
 | **Logs** | `podman logs -f portfolio-app` |
-| **Restart App** | `systemctl --user restart portfolio` |
+| **Restart App** | `systemctl --user restart portfolio.service` |
+| **Stop Stack** | `systemctl --user stop portfolio.service` |
 
 ---
 *Developed by Gemini Pro Agents. Managed by Oscar Iglesias Roqueiro*
