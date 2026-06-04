@@ -43,6 +43,7 @@ Para llevar a cabo la migración al stack 2.0, se implementaron las siguientes a
    - Sistemas de archivos de solo lectura (`ReadOnlyRootFilesystem=true`) en los contenedores Nginx y la Aplicación Flask.
    - Uso de imágenes base limpias y seguras (Chainguard/Wolfi y Alpine minimalistas).
 5. **Automatización de Despliegue y SSL:** ACME.sh se ejecuta como un contenedor sidecar realizando la validación DNS-01 (DuckDNS) para asegurar certificados SSL automáticos sin interrumpir el puerto 80/443 de Nginx.
+6. **Observabilidad y Monitorización Distribuida:** Implementamos una infraestructura de observabilidad distribuida. En el servidor `vps-prod` desplegamos un sensor de sistema operativo (Node Exporter), un sensor de métricas de Podman (Podman Exporter) y un recolector de logs endurecido y rootless (Promtail) agrupados dentro de un mismo Pod de monitorización. Estos servicios envían de forma segura la telemetría a través de una red VPN overlay privada (NetBird) hacia un nodo central de observabilidad en Oracle Cloud Infrastructure (OCI). En OCI se centraliza el almacenamiento con Prometheus y Loki, y se aprovisiona mediante API un cuadro de mando maestro en Grafana que unifica logs, uso de recursos por contenedor, I/O de disco/red y analíticas web en tiempo real.
 
 <img src="/static/img/projects/podman_stats_post.png" class="img-fluid w-100" alt="podman stats post"></img>
 *Fig 3. Estadísticas de contenedores de la versión 2.0 (Podman stats) que muestran el drástico descenso de RAM.*
@@ -60,6 +61,9 @@ Adicionalmente, realizamos pruebas de estrés HTTP (HTTP Benchmarking) simulando
 
 <img src="/static/img/projects/http_benchmarking_post.png" class="img-fluid w-100" alt="http benchmarking post"></img>
 *Fig 7. Pruebas de rendimiento HTTP tras la migración y optimización.*
+
+<img src="/static/img/projects/grafana_vps_prod.png" class="img-fluid w-100" alt="grafana vps prod"></img>
+*Fig 8. Cuadro de mando maestro consolidado de observabilidad en Grafana mostrando métricas de rendimiento y logs en tiempo real.*
 
 ## Resolución
 La migración a Portafolio 2.0 ha sido un éxito rotundo, logrando los siguientes resultados medibles:

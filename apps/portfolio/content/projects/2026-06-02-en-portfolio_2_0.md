@@ -43,6 +43,7 @@ To migrate to the 2.0 stack, we implemented the following system engineering cha
    - Mounted the Nginx and Flask filesystems as read-only (`ReadOnlyRootFilesystem=true`).
    - Sourced clean and secure base images (Chainguard/Wolfi and minimal Alpine).
 5. **ACME.sh Sidecar Automation:** Placed ACME.sh in a helper container using the DuckDNS DNS-01 validation challenge, generating SSL certs automatically without needing to bind host ports 80/443.
+6. **Distributed Observability and Monitoring:** Designed and implemented a secure, distributed observability pipeline. On the `vps-prod` server, we deployed a system-level agent (Node Exporter), a Podman container metrics exporter, and a hardened rootless Promtail log aggregator, all co-located within a single monitoring Pod. These agents securely stream metrics and logs via a private VPN overlay network (NetBird) to a central node on Oracle Cloud Infrastructure (OCI). In OCI, the data is stored in Prometheus and Loki, and a unified master Grafana dashboard is provisioned programmatically via API, showcasing CPU/RAM usage per container, disk and network I/O, syslog/auth logs, and real-time Nginx web traffic statistics.
 
 <img src="/static/img/projects/podman_stats_post.png" class="img-fluid w-100" alt="podman stats post"></img>
 *Fig 3. Podman stats on version 2.0, showing a massive memory reduction.*
@@ -60,6 +61,9 @@ Additionally, we ran HTTP benchmarking stress tests under concurrent load to eva
 
 <img src="/static/img/projects/http_benchmarking_post.png" class="img-fluid w-100" alt="http benchmarking post"></img>
 *Fig 7. HTTP benchmarking tests after migration and optimization.*
+
+<img src="/static/img/projects/grafana_vps_prod.png" class="img-fluid w-100" alt="grafana vps prod"></img>
+*Fig 8. Consolidated master observability dashboard in Grafana showing performance metrics and log streams in real-time.*
 
 ## Resolution
 The migration to Portfolio 2.0 has been a resounding success, delivering the following measurable results:
