@@ -39,6 +39,10 @@ mkdir -p "$PROJECT_DIR/data/meilisearch_data"
 mkdir -p "$PROJECT_DIR/data/portfolio_storage"
 mkdir -p "$PORTFOLIO_IMG_DIR"
 
+# Seed the image directory with initial app images
+echo "🖼️  Syncing application static images to data directory..."
+cp -ru "$PROJECT_DIR/apps/portfolio/portfolio/static/img/"* "$PORTFOLIO_IMG_DIR/" 2>/dev/null || true
+
 # Ensure non-root user (1000) inside container can write to bind mount
 chmod 777 "$PROJECT_DIR/data/meilisearch_data"
 chmod 777 "$PROJECT_DIR/data/portfolio_storage"

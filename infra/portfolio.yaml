@@ -4,7 +4,7 @@ metadata:
   name: portfolio
 spec:
   containers:
-  - image: docker.io/library/postgres:16-alpine
+  - image: ${DB_IMAGE}
     name: db
     env:
       - name: POSTGRES_DB
@@ -21,7 +21,7 @@ spec:
       hostPort: 5432
   - name: nginx
     image: ${GHCR_REGISTRY}/portfolio-nginx:latest
-    imagePullPolicy: Always
+    imagePullPolicy: ${IMAGE_PULL_POLICY}
     ports:
     - containerPort: 8081
     - containerPort: 8443
@@ -31,7 +31,7 @@ spec:
       readOnly: true
   - name: app
     image: ${GHCR_REGISTRY}/portfolio-app:latest
-    imagePullPolicy: Always
+    imagePullPolicy: ${IMAGE_PULL_POLICY}
     env:
       - name: DATABASE_URL
         value: "${DATABASE_URL}"
@@ -45,7 +45,7 @@ spec:
         name: portfolio-img-data
   - name: meilisearch
     image: docker.io/getmeili/meilisearch:v1.12.5
-    imagePullPolicy: Always
+    imagePullPolicy: ${IMAGE_PULL_POLICY}
     env:
       - name: MEILI_HTTP_ADDR
         value: "0.0.0.0:7700"
@@ -58,7 +58,7 @@ spec:
         name: meili-data
   - name: acme-sh
     image: ${GHCR_REGISTRY}/portfolio-acmesh:latest
-    imagePullPolicy: Always
+    imagePullPolicy: ${IMAGE_PULL_POLICY}
     env:
       - name: DuckDNS_Token
         value: "${DuckDNS_Token}"

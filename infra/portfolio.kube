@@ -2,9 +2,10 @@
 Network=portfolio-network
 Yaml=portfolio.yaml
 AutoUpdate=registry
-PublishPort=80:8081
-PublishPort=443:8443
+PublishPort=${PORT_HTTP}:8081
+PublishPort=${PORT_HTTPS}:8443
 PublishPort=7700:7700
+${PORT_DB_LINE}
 
 [Install]
 WantedBy=default.target

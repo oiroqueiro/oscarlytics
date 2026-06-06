@@ -21,7 +21,34 @@ fi
 cd "$PROJECT_DIR"
 
 # We export variables for envsubst
-export $(grep -v '^#' "$DOTENV_FILE" | xargs)
+set -a
+[ -f "$DOTENV_FILE" ] && . "$DOTENV_FILE"
+set +a
+
+if [ "$(id -u)" -eq 0 ]; then
+    export PORT_HTTP="80"
+    export PORT_HTTPS="443"
+    export PORT_DB_LINE=""
+    export IMAGE_PULL_POLICY="IfNotPresent"
+else
+    export PORT_HTTP="8080"
+    export PORT_HTTPS="8443"
+    export PORT_DB_LINE="PublishPort=5432:5432"
+    export IMAGE_PULL_POLICY="IfNotPresent"
+fi
+
+# Check postgres version from PG_VERSION file
+DB_VERSION="16"
+if [ -d "$PROJECT_DIR/data/portfolio_db" ]; then
+    DB_VERSION=$(podman run --rm -v "$PROJECT_DIR/data/portfolio_db:/db:z" alpine cat /db/PG_VERSION 2>/dev/null || echo "16")
+fi
+
+if [ "$DB_VERSION" = "18" ]; then
+    export DB_IMAGE="docker.io/library/postgres:alpine"
+else
+    export DB_IMAGE="docker.io/library/postgres:16-alpine"
+fi
+
 export DATABASE_URL="postgresql://${DB_USER}:${DB_PASSWORD}@127.0.0.1:5432/${DB_NAME}"
 export PWD
 export PORTFOLIO_IMG_DIR="${PORTFOLIO_IMG_DIR:-$PROJECT_DIR/data/portfolio_img}"
@@ -35,10 +62,9 @@ mkdir -p "$PROJECT_DIR/data/meilisearch_data"
 mkdir -p "$PROJECT_DIR/data/portfolio_storage"
 mkdir -p "$PORTFOLIO_IMG_DIR"
 
-# Seed the image directory with initial app images if empty
-if [ -z "$(ls -A "$PORTFOLIO_IMG_DIR")" ]; then
-    cp -r "$PROJECT_DIR/apps/portfolio/portfolio/static/img/"* "$PORTFOLIO_IMG_DIR/" 2>/dev/null || true
-fi
+# Seed the image directory with initial app images
+echo "🖼️  Syncing application static images to data directory..."
+cp -ru "$PROJECT_DIR/apps/portfolio/portfolio/static/img/"* "$PORTFOLIO_IMG_DIR/" 2>/dev/null || true
 
 # Ensure non-root user (1000) inside container can write to bind mount
 chmod 777 "$PROJECT_DIR/data/meilisearch_data"
@@ -47,15 +73,19 @@ chmod 777 "$PROJECT_DIR/data/portfolio_storage"
 # ----- 3. BUILD HARDENED IMAGES -----
 echo "🏗️  Building hardened Meilisearch image..."
 podman build -t portfolio-meilisearch:hardened -f "$PROJECT_DIR/infra/Containerfile.meilisearch" "$PROJECT_DIR/infra"
+podman tag portfolio-meilisearch:hardened "${GHCR_REGISTRY}/portfolio-meilisearch:latest" 2>/dev/null || true
 
 echo "🏗️  Building hardened Portfolio App image..."
 podman build -t portfolio-app:hardened -f "$PROJECT_DIR/apps/portfolio/Containerfile.app" "$PROJECT_DIR/apps/portfolio"
+podman tag portfolio-app:hardened "${GHCR_REGISTRY}/portfolio-app:latest"
 
 echo "🏗️  Building hardened Nginx image..."
 podman build -t portfolio-nginx:hardened -f "$PROJECT_DIR/infra/Containerfile.nginx" "$PROJECT_DIR/infra"
+podman tag portfolio-nginx:hardened "${GHCR_REGISTRY}/portfolio-nginx:latest"
 
 echo "🏗️  Building hardened ACME.sh image..."
 podman build -t portfolio-acmesh:hardened -f "$PROJECT_DIR/infra/Containerfile.acmesh" "$PROJECT_DIR/infra"
+podman tag portfolio-acmesh:hardened "${GHCR_REGISTRY}/portfolio-acmesh:latest"
 
 # ----- 4. GENERATION -----
 echo "⚙️  Generating .generated files for the stack..."
