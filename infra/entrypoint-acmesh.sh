@@ -33,7 +33,6 @@ issue_and_install() {
     /opt/acme.sh/acme.sh --issue \
         --dns dns_duckdns \
         -d "$DOMAIN" \
-        -d "*.$DOMAIN" \
         --challenge-alias "$CHALLENGE_ALIAS" \
         --server letsencrypt \
         --home "$HOME_DIR" \
