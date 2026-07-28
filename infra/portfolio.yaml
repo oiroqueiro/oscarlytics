@@ -64,8 +64,6 @@ spec:
         value: "${DuckDNS_Token}"
       - name: DOMAIN
         value: "${DOMAIN}"
-    command: ["/bin/bash", "-c"]
-    args: ["while true; do /opt/acme.sh/acme.sh --cron --home /root/.acme.sh; sleep 86400; done"]
     volumeMounts:
       - mountPath: /root/.acme.sh
         name: cert-data

@@ -27,7 +27,7 @@ Portfolio 2.0 upgrades the entire ecosystem to modern, secure, and resource-effi
 - **Search Engine Upgrade:** Elasticsearch was replaced by **Meilisearch**, which is drastically lighter and faster.
 - **Maximum Security (Distroless Base Images):** The containers are built using **Wolfi/Chainguard** distroless images (or minimal Alpine bases), reducing the attack surface.
 - **Rootless Podman & Quadlets:** The entire stack dropped `docker-compose` in favor of **Podman Quadlets**. It runs entirely in user-space (rootless) and integrates natively with Linux `systemd`.
-- **High Performance Nginx & SSL:** Nginx is hardened, and SSL is automatically handled via a sidecar `acme.sh` container using the DuckDNS DNS-01 challenge.
+- **High Performance Nginx & SSL:** Nginx is hardened, and SSL is automatically handled via a sidecar `acme.sh` container with an intelligent entrypoint (`entrypoint-acmesh.sh`) using the DuckDNS DNS-01 challenge, auto-installing production `fullchain.pem` certificates and gracefully reloading Nginx.
 
 ---
 
@@ -56,11 +56,11 @@ The stack is orchestrated as a single consolidated Pod in production:
 
 | Component | Upstream Image | Base Image | Security Scope |
 | :--- | :--- | :--- | :--- |
-| **Nginx** | `docker.io/library/nginx` | `nginx:alpine` | Direct SSL proxying, custom hardened configuration. |
+| **Nginx** | `docker.io/library/nginx` | `nginx:alpine` | Direct SSL proxying, custom hardened configuration, 12h graceful SSL reload. |
 | **Flask App** | Custom (Flask/Gunicorn) | `python:3.12-slim` | Runs user application, reads markdown, updates Meilisearch. |
 | **PostgreSQL** | `docker.io/library/postgres` | `postgres:alpine` | Secure relational storage for users, metadata, and logs. |
 | **Meilisearch** | `getmeili/meilisearch` | `getmeili/meilisearch` | Secure, ultra-fast index search. |
-| **ACME.sh** | `neilpang/acme.sh` | `alpine:latest` | Handles automatic SSL generation & DNS-01 validation. |
+| **ACME.sh** | `neilpang/acme.sh` | `alpine:latest` | Intelligent auto-issuance, DuckDNS DNS-01 validation, auto-install of `fullchain.pem`. |
 
 ---
 
