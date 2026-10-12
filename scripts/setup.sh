@@ -121,6 +121,17 @@ ln -sf "$PROJECT_DIR/infra/portfolio_meilisearch.generated.volume" "$QUADLET_DIR
 ln -sf "$PROJECT_DIR/infra/portfolio_storage.generated.volume"    "$QUADLET_DIR/portfolio_storage.volume"
 ln -sf "$PROJECT_DIR/infra/portfolio_certs.volume"               "$QUADLET_DIR/portfolio_certs.volume"
 
+# ----- 5.5. SYSTEMD TIMERS (SSL AUTO-RELOAD) -----
+echo "⏲️  Installing automated Nginx SSL reload timer..."
+if [ "$(id -u)" -eq 0 ]; then
+    SYSTEMD_UNIT_DIR="/etc/systemd/system"
+else
+    SYSTEMD_UNIT_DIR="$HOME/.config/systemd/user"
+fi
+mkdir -p "$SYSTEMD_UNIT_DIR"
+cp "$PROJECT_DIR/infra/portfolio-nginx-reload.service" "$SYSTEMD_UNIT_DIR/"
+cp "$PROJECT_DIR/infra/portfolio-nginx-reload.timer" "$SYSTEMD_UNIT_DIR/"
+
 # ----- 6. ACTIVATION -----
 echo "🚀 Reloading systemd..."
 $SYSTEMCTL_CMD daemon-reload
@@ -136,6 +147,9 @@ $SYSTEMCTL_CMD start portfolio_db-volume.service portfolio_meilisearch-volume.se
 
 echo "🚀 Starting main portfolio service..."
 $SYSTEMCTL_CMD start portfolio.service
+
+echo "⏲️  Enabling automated SSL reload timer..."
+$SYSTEMCTL_CMD enable --now portfolio-nginx-reload.timer
 
 echo "✅ Stack 'portfolio' consolidated and synchronized!"
 echo ""

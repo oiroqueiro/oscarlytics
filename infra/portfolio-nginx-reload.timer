@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily graceful reload of Nginx SSL certificates for Portfolio 2.0
+After=portfolio.service
+
+[Timer]
+OnCalendar=*-*-* 04:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,7 @@
+[Unit]
+Description=Graceful reload Nginx for Portfolio 2.0 (SSL certificate update)
+After=portfolio.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/podman exec portfolio-nginx nginx -s reload

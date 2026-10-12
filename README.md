@@ -27,7 +27,7 @@ Portfolio 2.0 upgrades the entire ecosystem to modern, secure, and resource-effi
 - **Search Engine Upgrade:** Elasticsearch was replaced by **Meilisearch**, which is drastically lighter and faster.
 - **Maximum Security (Distroless Base Images):** The containers are built using **Wolfi/Chainguard** distroless images (or minimal Alpine bases), reducing the attack surface.
 - **Rootless Podman & Quadlets:** The entire stack dropped `docker-compose` in favor of **Podman Quadlets**. It runs entirely in user-space (rootless) and integrates natively with Linux `systemd`.
-- **High Performance Nginx & SSL:** Nginx is hardened, and SSL is automatically handled via a sidecar `acme.sh` container with an intelligent entrypoint (`entrypoint-acmesh.sh`) using the DuckDNS DNS-01 challenge, auto-installing production `fullchain.pem` certificates and gracefully reloading Nginx.
+- **High Performance Nginx & SSL:** Nginx is hardened, and SSL is automatically handled via a sidecar `acme.sh` container using the DuckDNS DNS-01 challenge. Certificates in the shared volume are seamlessly loaded into Nginx without downtime via a native Systemd timer (`portfolio-nginx-reload.timer`) running daily graceful reloads (`nginx -s reload`).
 
 ---
 
@@ -192,8 +192,11 @@ link1: https://github.com/roque/nuevo_portfolio
 | :--- | :--- |
 | **Status** | `systemctl --user status portfolio.service` |
 | **Logs** | `podman logs -f portfolio-app` |
+| **SSL Timer Status** | `systemctl status portfolio-nginx-reload.timer` |
+| **SSL Reload Now** | `podman exec portfolio-nginx nginx -s reload` |
 | **Restart App** | `systemctl --user restart portfolio.service` |
 | **Stop Stack** | `systemctl --user stop portfolio.service` |
 
 ---
 *Developed by Gemini Pro Agents. Managed by Oscar Iglesias Roqueiro*
+
