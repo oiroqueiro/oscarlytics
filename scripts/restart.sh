@@ -13,9 +13,9 @@ fi
 
 # Optional flag --pull / -p to also pull the latest app image from GHCR before restarting
 if [ "$1" = "--pull" ] || [ "$1" = "-p" ]; then
-    set -a
-    [ -f "$DOTENV_FILE" ] && . "$DOTENV_FILE"
-    set +a
+    if [ -f "$DOTENV_FILE" ]; then
+        GHCR_REGISTRY=$(grep '^GHCR_REGISTRY=' "$DOTENV_FILE" | cut -d= -f2- | tr -d '"' | tr -d "'")
+    fi
     GHCR_REGISTRY="${GHCR_REGISTRY:-ghcr.io/oiroqueiro}"
     echo "☁️  Pulling latest application image from ${GHCR_REGISTRY}..."
     podman pull "${GHCR_REGISTRY}/portfolio-app:latest"
