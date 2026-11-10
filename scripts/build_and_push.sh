@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # ----- 1. PATHS & CONFIG -----
 PROJECT_DIR=$(cd "$(dirname "$0")/.." && pwd)
