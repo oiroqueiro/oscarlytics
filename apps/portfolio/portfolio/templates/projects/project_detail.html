@@ -41,7 +41,7 @@
 
                                 {% for keyw in keyw_list %}
                                 <a class="text-uppercase"
-                                    href="{{ url_for('projects', _external=True, lang=lang, keyw=keyw, proj_date=project.date, proj_n=project_project_n) }}">{{
+                                    href="{{ url_for('projects', _external=True, lang=lang, keyw=keyw, proj_date=project.date, proj_n=project.project_n) }}">{{
                                     keyw }}</a>
                                 <span class="px-1">|</span>
                                 {% endfor %}
@@ -68,8 +68,45 @@
                         </div>
                         {% endif %}
                     </div>
+
+                    <nav class="project-navigation border-top pt-4 mt-5" aria-label="Project navigation">
+                        <div class="row align-items-center g-3">
+                            <div class="col-12 col-md-5 text-start">
+                                {% if prev_project %}
+                                <a class="post-title d-inline-block text-decoration-none"
+                                    href="{{ url_for('project', lang=lang, proj_date=prev_project.date, proj_n=prev_project.project_n, title_slug=prev_project.title_slug) }}">
+                                    <span class="d-block small text-uppercase text-muted mb-1">
+                                        <i class="fas fa-arrow-left me-2"></i>{{ previous }}
+                                    </span>
+                                    <span class="h6 fw-normal mb-0 d-block">{{ prev_project.title }}</span>
+                                </a>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12 col-md-2 text-center">
+                                <a class="btn btn-outline-primary btn-sm"
+                                    href="{{ url_for('projects', lang=lang) }}">
+                                    {{ menu_projects }}
+                                </a>
+                            </div>
+
+                            <div class="col-12 col-md-5 text-md-end text-start">
+                                {% if next_project %}
+                                <a class="post-title d-inline-block text-decoration-none"
+                                    href="{{ url_for('project', lang=lang, proj_date=next_project.date, proj_n=next_project.project_n, title_slug=next_project.title_slug) }}">
+                                    <span class="d-block small text-uppercase text-muted mb-1">
+                                        {{ next }}<i class="fas fa-arrow-right ms-2"></i>
+                                    </span>
+                                    <span class="h6 fw-normal mb-0 d-block">{{ next_project.title }}</span>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </nav>
                 </div>
             </div>
+        </div>
+    </div>
 </section>
 
 

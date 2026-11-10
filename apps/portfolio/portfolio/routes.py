@@ -463,7 +463,26 @@ def project(lang=None, proj_date=None, proj_n=1, title_slug=None):
     if lang is None:
         lang = get_default_language()
 
-    project = Projects.get_by_projn(Languages.getid(lang), proj_date, proj_n)
+    langid = Languages.getid(lang)
+    project = Projects.get_by_projn(langid, proj_date, proj_n)
+    if not project:
+        abort(404)
+
+    all_projs = (
+        Projects.query
+        .filter(Projects.languageid == langid)
+        .order_by(Projects.date.desc(), Projects.project_n.desc())
+        .all()
+    )
+    prev_project = None
+    next_project = None
+    for idx, p in enumerate(all_projs):
+        if p.id == project.id:
+            if idx > 0:
+                prev_project = all_projs[idx - 1]
+            if idx < len(all_projs) - 1:
+                next_project = all_projs[idx + 1]
+            break
 
     set_lang(lang)
     set_proj(proj_n)
@@ -478,6 +497,12 @@ def project(lang=None, proj_date=None, proj_n=1, title_slug=None):
 
     value = Content.get_value('', lang, 'project_resolution')
     header_resolution = 'Resolution' if not value else str(value['value'])
+
+    value = Content.get_value('', lang, 'previous')
+    previous = '' if not value else str(value['value'])
+
+    value = Content.get_value('', lang, 'next')
+    next_label = '' if not value else str(value['value'])
 
     value = Content.get_value('', lang, 'read')
     read = '' if not value else str(value['value'])
@@ -507,6 +532,8 @@ def project(lang=None, proj_date=None, proj_n=1, title_slug=None):
     return render_template('projects/project_detail.html', lang=lang,
                            proj_date=proj_date, proj_n=proj_n,
                            title_slug=title_slug, project=project,
+                           prev_project=prev_project, next_project=next_project,
+                           previous=previous, next=next_label,
                            keyw_title=keyw_title, time_reading=time_reading,
                            get_date_name=get_date_name,
                            header_action=header_action,
