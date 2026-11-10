@@ -24,7 +24,9 @@ fi
 cd "$PROJECT_DIR"
 
 # We export variables for envsubst
-export $(grep -v '^#' "$DOTENV_FILE" | xargs)
+set -a
+[ -f "$DOTENV_FILE" ] && . "$DOTENV_FILE"
+set +a
 export DATABASE_URL="postgresql://${DB_USER}:${DB_PASSWORD}@127.0.0.1:5432/${DB_NAME}"
 export PWD
 export PORTFOLIO_IMG_DIR="${PORTFOLIO_IMG_DIR:-$PROJECT_DIR/data/portfolio_img}"

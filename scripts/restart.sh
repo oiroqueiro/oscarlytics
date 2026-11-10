@@ -13,9 +13,9 @@ fi
 
 # Optional flag --pull / -p to also pull the latest app image from GHCR before restarting
 if [ "$1" = "--pull" ] || [ "$1" = "-p" ]; then
-    if [ -f "$DOTENV_FILE" ]; then
-        export $(grep -v '^#' "$DOTENV_FILE" | xargs)
-    fi
+    set -a
+    [ -f "$DOTENV_FILE" ] && . "$DOTENV_FILE"
+    set +a
     GHCR_REGISTRY="${GHCR_REGISTRY:-ghcr.io/oiroqueiro}"
     echo "☁️  Pulling latest application image from ${GHCR_REGISTRY}..."
     podman pull "${GHCR_REGISTRY}/portfolio-app:latest"
@@ -29,3 +29,4 @@ echo "----------------------------------------------------------------"
 echo "To check the sync logs, run:"
 echo "  podman logs --tail 30 portfolio-app"
 echo "----------------------------------------------------------------"
+
