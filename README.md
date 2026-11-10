@@ -100,6 +100,7 @@ Communication between Nginx, App, Postgres, and Meilisearch takes place inside t
 ├── scripts/              # 🤖 Automation & Setup utilities
 │   ├── build_and_push.sh # Compiles images and pushes them to GHCR
 │   ├── deploy_prod.sh    # Deploys the infrastructure on the VPS
+│   ├── restart.sh        # Restarts the portfolio service (and optionally pulls latest image)
 │   └── setup.sh          # Builds and runs everything locally for testing
 │
 └── data/                 # 🗄️ Persistent volumes (Created automatically, ignored by Git)
@@ -117,9 +118,9 @@ Communication between Nginx, App, Postgres, and Meilisearch takes place inside t
    - **Mechanism:** Run `./scripts/setup.sh`. The system will compile the application and the `sync_projects.py` script will automatically populate your local database from these folders.
 
 2. **Production (Your VPS):**
-   - **Markdown (.md):** Upload your files via SFTP to `~/portfolio_2.0/data/portfolio_storage/projects/`.
+   - **Markdown (.md):** Edit existing files or upload new ones via SFTP (FileZilla) to `~/portfolio_2.0/data/portfolio_storage/projects/`. On first startup, the container automatically seeds this folder with the base `.md` projects so they are ready to edit on the host without overwriting your subsequent changes.
    - **Images:** Upload your images via SFTP to `~/portfolio_2.0/data/portfolio_img/projects/`.
-   - **Mechanism:** The containers run directly from GHCR and mount the `data/` folder as persistent volumes.
+   - **Mechanism:** The containers run directly from GHCR and mount the `data/` folder as persistent volumes. Whenever you modify or add `.md` files in production, simply run `./scripts/restart.sh` on the VPS to sync changes to PostgreSQL and Meilisearch.
 
 ---
 
@@ -155,6 +156,14 @@ On the production server, you only need the `infra/` folder, the `.env` file, an
 chmod +x scripts/deploy_prod.sh
 ./scripts/deploy_prod.sh
 ```
+
+### 4. Updating Content / Restarting in Production
+After editing or uploading Markdown (`.md`) files in `data/portfolio_storage/projects/` on the VPS, restart the service to sync the database and search index:
+```bash
+chmod +x scripts/restart.sh
+./scripts/restart.sh
+```
+*(Tip: Run `./scripts/restart.sh --pull` if you also want to pull the latest application image from GHCR before restarting).*
 
 ---
 
@@ -194,7 +203,8 @@ link1: https://github.com/roque/nuevo_portfolio
 | **Logs** | `podman logs -f portfolio-app` |
 | **SSL Timer Status** | `systemctl status portfolio-nginx-reload.timer` |
 | **SSL Reload Now** | `podman exec portfolio-nginx nginx -s reload` |
-| **Restart App** | `systemctl --user restart portfolio.service` |
+| **Restart App (Script)** | `./scripts/restart.sh` (or `./scripts/restart.sh --pull`) |
+| **Restart App (Systemd)** | `systemctl --user restart portfolio.service` |
 | **Stop Stack** | `systemctl --user stop portfolio.service` |
 
 ---

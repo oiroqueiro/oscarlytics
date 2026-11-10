@@ -1,4 +1,5 @@
 import os
+import shutil
 import frontmatter
 from datetime import datetime
 from portfolio import portfolio, db
@@ -6,8 +7,22 @@ from portfolio.models import Projects, Languages
 
 def sync_projects():
     base_dir = os.path.join(os.path.dirname(__file__), 'content', 'projects')
-    mounted_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'mounted', 'projects')
-    
+    mounted_dir = os.path.join(os.path.dirname(__file__), 'mounted', 'projects')
+
+    # Seed mounted_dir with initial markdown files from base_dir if they don't exist yet
+    if os.path.exists(base_dir) and os.path.exists(os.path.dirname(mounted_dir)):
+        try:
+            os.makedirs(mounted_dir, exist_ok=True)
+            for filename in os.listdir(base_dir):
+                if filename.endswith('.md'):
+                    src_file = os.path.join(base_dir, filename)
+                    dst_file = os.path.join(mounted_dir, filename)
+                    if not os.path.exists(dst_file):
+                        shutil.copy2(src_file, dst_file)
+                        print(f"📄 Seeded {filename} to {mounted_dir}")
+        except Exception as e:
+            print(f"⚠️ Could not seed {mounted_dir}: {e}")
+
     # Process base first, then mounted so mounted prevails
     directories = [base_dir, mounted_dir]
 
@@ -36,9 +51,10 @@ def sync_projects():
             continue
             
         print(f"📂 Processing directory {projects_dir}...")
-        for filename in os.listdir(projects_dir):
-            if filename.endswith('.md'):
-                filepath = os.path.join(projects_dir, filename)
+        for filename in sorted(os.listdir(projects_dir)):
+            if not filename.endswith('.md'):
+                continue
+            filepath = os.path.join(projects_dir, filename)
             try:
                 with open(filepath, 'r', encoding='utf-8') as f:
                     post = frontmatter.load(f)
@@ -147,6 +163,9 @@ def sync_projects():
                     project_item.image5 = image5
                     project_item.link1 = link1
                     project_item.link2 = link2
+                    project_item.link3 = link3
+                    project_item.link4 = link4
+                    project_item.link5 = link5
                     print(f"ℹ️ Updated: {title} ({p_lang})")
 
                 db.session.commit()

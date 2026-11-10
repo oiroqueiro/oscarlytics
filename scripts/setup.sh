@@ -59,7 +59,7 @@ export DuckDNS_Token="${DuckDNS_Token:-}"
 echo "📂 Ensuring data directories exist..."
 mkdir -p "$PROJECT_DIR/data/portfolio_db"
 mkdir -p "$PROJECT_DIR/data/meilisearch_data"
-mkdir -p "$PROJECT_DIR/data/portfolio_storage"
+mkdir -p "$PROJECT_DIR/data/portfolio_storage/projects"
 mkdir -p "$PORTFOLIO_IMG_DIR"
 
 # Seed the image directory with initial app images
@@ -68,7 +68,7 @@ cp -ru "$PROJECT_DIR/apps/portfolio/portfolio/static/img/"* "$PORTFOLIO_IMG_DIR/
 
 # Ensure non-root user (1000) inside container can write to bind mount
 chmod 777 "$PROJECT_DIR/data/meilisearch_data"
-chmod 777 "$PROJECT_DIR/data/portfolio_storage"
+chmod -R 777 "$PROJECT_DIR/data/portfolio_storage"
 
 # ----- 3. BUILD HARDENED IMAGES -----
 echo "🏗️  Building hardened Meilisearch image..."
