@@ -118,9 +118,9 @@ Communication between Nginx, App, Postgres, and Meilisearch takes place inside t
    - **Mechanism:** Run `./scripts/setup.sh`. The system will compile the application and the `sync_projects.py` script will automatically populate your local database from these folders.
 
 2. **Production (Your VPS):**
-   - **Markdown (.md):** Edit existing files or upload new ones via SFTP (FileZilla) to `~/portfolio_2.0/data/portfolio_storage/projects/`. On first startup, the container automatically seeds this folder with the base `.md` projects so they are ready to edit on the host without overwriting your subsequent changes.
-   - **Images:** Upload your images via SFTP to `~/portfolio_2.0/data/portfolio_img/projects/`.
-   - **Mechanism:** The containers run directly from GHCR and mount the `data/` folder as persistent volumes. Whenever you modify or add `.md` files in production, simply run `./scripts/restart.sh` on the VPS to sync changes to PostgreSQL and Meilisearch.
+   - **Markdown (.md):** Edit existing files or upload new ones via SFTP (FileZilla) directly to `~/oscarlytics/apps/portfolio/content/projects/`.
+   - **Images:** Upload your images via SFTP to `~/oscarlytics/data/portfolio_img/projects/`.
+   - **Mechanism:** Whenever you modify or add `.md` files in `apps/portfolio/content/projects/` on the VPS, simply run `./scripts/restart.sh` to copy them into the persistent container storage and sync changes to PostgreSQL and Meilisearch with zero downtime.
 
 ---
 
@@ -158,12 +158,11 @@ chmod +x scripts/deploy_prod.sh
 ```
 
 ### 4. Updating Content / Restarting in Production
-After editing or uploading Markdown (`.md`) files in `data/portfolio_storage/projects/` on the VPS, restart the service to sync the database and search index:
+After editing or uploading Markdown (`.md`) files in `apps/portfolio/content/projects/` on the VPS, run the update script to sync the database and search index:
 ```bash
-chmod +x scripts/restart.sh
 ./scripts/restart.sh
 ```
-*(Tip: Run `./scripts/restart.sh --pull` if you also want to pull the latest application image from GHCR before restarting).*
+*(Tip: Run `./scripts/restart.sh --pull` if you also want to pull a new application image from GHCR and restart the pod).*
 
 ---
 
