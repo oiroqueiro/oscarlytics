@@ -36,10 +36,10 @@ if [ "$1" = "--pull" ] || [ "$1" = "-p" ]; then
     done
 fi
 
-# Sync project images from static/img/projects and data/portfolio_img/projects into the running container
+# Sync project images from static/img/projects (generic fallbacks, no-clobber) and data/portfolio_img/projects into the running container
 mkdir -p "$DATA_IMG_PROJECTS"
 if [ -d "$STATIC_IMG_PROJECTS" ]; then
-    cp -ru "$STATIC_IMG_PROJECTS/." "$DATA_IMG_PROJECTS/" 2>/dev/null || true
+    cp -rn "$STATIC_IMG_PROJECTS/." "$DATA_IMG_PROJECTS/" 2>/dev/null || true
 fi
 if [ -d "$DATA_IMG_PROJECTS" ]; then
     echo "🖼️  Syncing project images into container..."
