@@ -5,6 +5,8 @@ PROJECT_DIR=$(cd "$(dirname "$0")/.." && pwd)
 DOTENV_FILE="$PROJECT_DIR/infra/.env"
 PROJECTS_SRC="$PROJECT_DIR/apps/portfolio/content/projects"
 CONTENT_YAML="$PROJECT_DIR/apps/portfolio/content/content.yaml"
+STATIC_IMG_PROJECTS="$PROJECT_DIR/apps/portfolio/portfolio/static/img/projects"
+DATA_IMG_PROJECTS="$PROJECT_DIR/data/portfolio_img/projects"
 
 # Detect root vs non-root to adapt Systemd commands
 if [ "$(id -u)" -eq 0 ]; then
@@ -32,6 +34,17 @@ if [ "$1" = "--pull" ] || [ "$1" = "-p" ]; then
         fi
         sleep 1
     done
+fi
+
+# Sync project images from static/img/projects and data/portfolio_img/projects into the running container
+mkdir -p "$DATA_IMG_PROJECTS"
+if [ -d "$STATIC_IMG_PROJECTS" ]; then
+    cp -ru "$STATIC_IMG_PROJECTS/." "$DATA_IMG_PROJECTS/" 2>/dev/null || true
+fi
+if [ -d "$DATA_IMG_PROJECTS" ]; then
+    echo "🖼️  Syncing project images into container..."
+    podman exec portfolio-app mkdir -p /app/portfolio/static/img/projects
+    podman cp "$DATA_IMG_PROJECTS/." portfolio-app:/app/portfolio/static/img/projects/
 fi
 
 # Sync Markdown projects and content.yaml from apps/portfolio/content/ into the running container
